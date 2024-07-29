@@ -7,10 +7,15 @@ import { getFruit } from './APICall'
 import MainPage from '../Components/MainPage/MainPage'
 function App() {
   const [fruits, setFruits] = useState([])
-  const allSeasonalFruits = [
+  const seasonsData = [
+    { Winter: ['December', 'January', 'February'] },
+    { Spring: ['March', 'April', 'May'] },
+    { Summer: ['June', 'July', 'August'] },
+    { Fall: ['September', 'October', 'November'] }];
+  const allSeasonalFruitsData = [
     { Spring: ['Strawberry', 'Kiwi', 'Pineapple', 'Apricot', 'Cherry']},
     { Summer: ['Blackberry', 'Raspberry', 'Blueberry', 'Watermelon', 
-      'Peach', 'Melon', 'Plum', 'Mango', 'Passionfruit', 'Fig', 'Tomato', 'Green Apple' ]},
+        'Peach', 'Melon', 'Plum', 'Mango', 'Passionfruit', 'Fig', 'Tomato', 'Green Apple' ]},
     { Fall: ['Persimmon', 'Pomegranate', 'Apple', 'Pear', 'Cranberry',
         'Grapes', 'Japanese Persimmon', 'Pumpkin']},
     { Winter: [
@@ -39,7 +44,7 @@ function App() {
     <>
     <Header/>
     <Routes>
-      <Route path='/' element={<MainPage searchFruits={searchFruits} allSeasonalFruits={allSeasonalFruits}/>}/>
+      <Route path='/' element={<MainPage searchFruits={searchFruits} seasonsData={seasonsData} allSeasonalFruitsData={allSeasonalFruitsData}/>}/>
       <Route path='/nutritiousfruits' element={<PopFruit/>}/>
     </Routes>
     </>
