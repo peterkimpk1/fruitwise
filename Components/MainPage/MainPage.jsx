@@ -2,11 +2,11 @@ import React from 'react'
 import './MainPage.css'
 import SearchContainer from '../SearchContainer/SearchContainer'
 import SeasonFruitContainer from '../SeasonFruitContainer/SeasonFruitContainer'
-const MainPage = ({searchFruits}) => {
+const MainPage = ({searchFruits,allSeasonalFruits}) => {
   return (
-    <div>
+    <div className='main'>
       <SearchContainer searchFruits={searchFruits}/>
-      <SeasonFruitContainer/>
+      <SeasonFruitContainer allSeasonalFruits={allSeasonalFruits}/>
       <h2>Why Fruits?</h2>
     </div>
   )

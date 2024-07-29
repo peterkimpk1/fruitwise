@@ -1,0 +1,13 @@
+.season-cards-container {
+    display: flex;
+    overflow: auto;
+    width: 50vw;
+}
+
+.season-card {
+    border: 0.5px solid red;
+    min-width: 15em;
+    height: 15em;
+    padding: 10px;
+    text-align: center;
+}
