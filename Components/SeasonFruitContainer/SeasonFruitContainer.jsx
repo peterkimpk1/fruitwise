@@ -21,12 +21,12 @@ const SeasonFruitContainer = ({seasonsData, allSeasonalFruitsData}) => {
         const currentSeasonFruits = allSeasonalFruitsData.find(seasonalFruits => 
             Object.keys(seasonalFruits)[0] === currentSeason
         )
-        setSeason(Object.keys(currentSeasonFruits))
-        setSeasonFruits(currentSeasonFruits)
+        setSeason(Object.keys(currentSeasonFruits));
+        setSeasonFruits(currentSeasonFruits);
     };
   return (
     <div className='season-fruit-container'>
-      <h3>{currentDate}'s Seasonal Fruits</h3>
+      <h2>{currentDate}'s Seasonal Fruits</h2>
       <SeasonFruitCard seasonFruits={seasonFruits} season={season}/>
     </div>
   )

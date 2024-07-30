@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
 import PopFruit from '../Components/PopFruit/PopFruit'
 import Header from '../Components/Header/Header'
-import { Route, Routes } from 'react-router-dom'
+import { NavLink, Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
 import { getFruit } from './APICall'
 import MainPage from '../Components/MainPage/MainPage'
+import './App.css'
+// import SearchResults from '../Components/SearchResults/SearchResults'
 function App() {
-  const [fruits, setFruits] = useState([])
+  const [fruits, setFruits] = useState([]);
+  const [results, setResults] = useState('');
   const seasonsData = [
     { Winter: ['December', 'January', 'February'] },
     { Spring: ['March', 'April', 'May'] },
@@ -38,13 +41,30 @@ function App() {
         filteredFruits.push(fruit)
       }
     })
-    setFruits(filteredFruits)
+    if(filteredFruits.length > 0) {
+      let results = filteredFruits.map(({id,family,genus,name,nutritions,order}) => {
+        return (
+          <NavLink to={`/details/:${id}`} className='search-link'>
+            <div className='result-card'>
+              <img className='fruit-img' src={`/src/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
+              <div className='fruit-info'>
+                <p>Name: {name}</p>
+                <p>Family: {family}</p>
+                <p>Genus: {genus}</p>
+              </div>
+            </div>
+          </NavLink>
+        )
+      })
+      setResults(<div className='query-result'>{results}</div>)
+    }
+   
   }
   return (
     <>
     <Header/>
     <Routes>
-      <Route path='/' element={<MainPage searchFruits={searchFruits} seasonsData={seasonsData} allSeasonalFruitsData={allSeasonalFruitsData}/>}/>
+      <Route path='/' element={<MainPage searchFruits={searchFruits} seasonsData={seasonsData} allSeasonalFruitsData={allSeasonalFruitsData} results={results}/>}/>
       <Route path='/nutritiousfruits' element={<PopFruit/>}/>
     </Routes>
     </>

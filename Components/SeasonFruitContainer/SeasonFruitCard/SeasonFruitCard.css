@@ -5,9 +5,12 @@
 }
 
 .season-card {
-    border: 0.5px solid red;
     min-width: 15em;
     height: 12em;
     padding: 10px;
     text-align: center;
+    img {
+        width: 10em;
+        height: 8em;
+    }
 }

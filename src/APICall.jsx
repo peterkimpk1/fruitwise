@@ -1,5 +1,5 @@
 export function getFruit() {
-    return fetch('https://justcors.com/tl_6bbc215/https://fruityvice.com/api/fruit/all', {
+    return fetch('https://justcors.com/tl_ba45ddf/https://fruityvice.com/api/fruit/all', {
         method: 'GET'
     })
     .then(res => {

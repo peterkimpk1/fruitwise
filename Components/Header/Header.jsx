@@ -6,7 +6,7 @@ const Header = () => {
     <nav>
         <Outlet/>
         <NavLink to='/'>
-            <p>Fruits in Season</p>
+            <p>FruitWise</p>
         </NavLink>
         <ol className='navigation'>
             <NavLink to='/'>

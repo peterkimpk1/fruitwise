@@ -8,6 +8,7 @@ const SeasonFruitCard = ({seasonFruits,season}) => {
       return (
         <div className='season-card' key={uniqueKey}>    
           <h3>{fruit}</h3>
+          <img src={`../../src/assets/${fruit.toLowerCase()}.jpg`}/>
         </div>  
       )
     })
