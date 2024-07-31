@@ -1,6 +1,12 @@
 import React from 'react'
 
-const CardContainer = () => {
+const CardContainer = ({nutritiousFruits}) => {
+  console.log(nutritiousFruits)
+  // if (nutritiousFruits.length === 0) {
+  //   return (
+  //     <Card/>
+  //   )
+  // }
   return (
     <div>
       
