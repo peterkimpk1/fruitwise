@@ -6,6 +6,8 @@ const MainPage = ({searchFruits, results, seasonFruits, seasonFruitCards}) => {
   return (
     <div className='main'>
       <SearchContainer searchFruits={searchFruits} results={results}/>
+      
+      <SeasonFruitContainer seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>
       <section className='reason-section'>
         <h2>Why fruits?</h2>
         <div className='reason-container'>
@@ -20,7 +22,6 @@ const MainPage = ({searchFruits, results, seasonFruits, seasonFruitCards}) => {
           </div>
         </div>
       </section>
-      <SeasonFruitContainer seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>
     </div>
   )
 }

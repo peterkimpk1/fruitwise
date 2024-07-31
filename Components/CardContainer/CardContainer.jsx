@@ -2,9 +2,7 @@ import React from 'react'
 import Card from './Card/Card'
 import './CardContainer.css'
 const CardContainer = ({nutritiousFruits, nutritionNames}) => {
-  console.log(nutritiousFruits)
   if (nutritiousFruits.length > 0) {
-    
     var nutritionCards = nutritiousFruits.map(({name,id,family,order,genus,nutritions}) => {
       let singleFruitNutrition = Object.values(nutritions).slice(1)
       let lowestNutrition = Math.min(...singleFruitNutrition)

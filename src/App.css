@@ -1,7 +1,7 @@
 .query-result {
     width: 24em;
-    overflow-y: scroll;
-    max-height: 15em;
+    overflow: auto;
+    max-height: 25em;
     .result-card {
         display: flex;
         padding: .5em;

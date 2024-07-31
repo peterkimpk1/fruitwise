@@ -7,7 +7,7 @@ import { seasonsData, allSeasonalFruitsData } from './seasonsData'
 import PopFruit from '../Components/PopFruit/PopFruit'
 import Header from '../Components/Header/Header'
 import MainPage from '../Components/MainPage/MainPage'
-
+import FruitDetail from '../Components/FruitDetail/FruitDetail'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -77,7 +77,9 @@ function App() {
       return (
         <div className='season-card' key={fruit.id}>    
           <h3>{fruit.name}</h3>
-          <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+          <div className='season-card-image-container'>
+           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+          </div>
           <p className='high-nutrition'>{`High in: ${fruitNutrition[highestNutritionIndex]} ${highestNutrition}g `}</p>
           <p className='low-nutrition'>{`Low in: ${fruitNutrition[lowestNutritionIndex]} ${lowestNutrition}g `}</p>
         </div>  
@@ -95,6 +97,7 @@ function App() {
     <Routes>
       <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
       <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames}/>}/>
+      <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
     </Routes>
     </>
   )

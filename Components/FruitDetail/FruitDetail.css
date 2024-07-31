@@ -1,0 +1,41 @@
+.detail-page {
+    display: flex;
+    padding: 1.5em;
+    background-color: #b1d1d5;
+    h2, h3{
+        margin: 0;
+    }
+    .detail-wrapper {
+        width: 50%;
+       .detail-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 85%;
+        height: 88.5%;
+        background-color: rgba(255,255,255,0.3);
+        backdrop-filter: blur(20px);
+        border-radius: 10px;
+        padding: 1em;
+       }
+        .detail-image {
+            width: 30em;
+            height: 22.5em;
+            border: 1px solid white;
+            img {
+                width: 100%;
+                aspect-ratio: 4/3;
+            }
+        }
+    }
+    .all-info-wrapper {
+        width: 50%;
+        .info-wrapper {
+            background-color: rgba(255,255,255,0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+            padding: 1em;
+            margin-bottom: 2em;
+        }
+    }
+}
