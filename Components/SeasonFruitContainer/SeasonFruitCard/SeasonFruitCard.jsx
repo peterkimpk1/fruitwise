@@ -1,9 +1,10 @@
 import React from 'react'
 
-const SeasonFruitCard = () => {
+import './SeasonFruitCard.css'
+const SeasonFruitCard = ({seasonFruitCards}) => {
   return (
-    <div>
-      
+    <div className='season-cards-container'>
+      {seasonFruitCards}
     </div>
   )
 }

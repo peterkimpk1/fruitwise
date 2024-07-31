@@ -1,0 +1,31 @@
+.query-result {
+    width: 24em;
+    overflow-y: scroll;
+    max-height: 15em;
+    .result-card {
+        display: flex;
+        padding: .5em;
+        height: 5em;
+        width: 22em;
+        .fruit-img {
+            width: 5em;
+            height: 5em;
+        }
+        .fruit-info {
+            margin-left: 2em;
+        }
+        p {
+            margin: 0;
+            color: black;
+        }
+    }
+}
+.search-link:hover {
+    color: blue;
+    p {
+        color: blue;
+    }
+    .result-card {
+        background-color: lightgrey;
+    }
+}
