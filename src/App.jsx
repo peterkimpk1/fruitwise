@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { getFruit } from './APICall'
 import MainPage from '../Components/MainPage/MainPage'
 import './App.css'
-// import SearchResults from '../Components/SearchResults/SearchResults'
+
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -44,8 +44,8 @@ function App() {
     if(filteredFruits.length > 0) {
       let results = filteredFruits.map(({id,family,genus,name,nutritions,order}) => {
         return (
-          <NavLink to={`/details/:${id}`} className='search-link'>
-            <div className='result-card'>
+          <NavLink to={`/details/${id}`} className='search-link' key={id}>
+            <div className='result-card' >
               <img className='fruit-img' src={`/src/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
               <div className='fruit-info'>
                 <p>Name: {name}</p>

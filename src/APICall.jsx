@@ -1,7 +1,5 @@
 export function getFruit() {
-    return fetch('https://justcors.com/tl_ba45ddf/https://fruityvice.com/api/fruit/all', {
-        method: 'GET'
-    })
+    return fetch('https://justcors.com/tl_e4111c9/https://fruityvice.com/api/fruit/all')
     .then(res => {
         if (!res.ok) {
             throw new Error ('could not fetch')

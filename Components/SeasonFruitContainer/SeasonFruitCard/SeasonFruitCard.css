@@ -1,16 +1,22 @@
 .season-cards-container {
     display: flex;
-    overflow: auto;
-    width: 50vw;
+    overflow: scroll;
+    width: 30em;
+    height: 20em;
+    scroll-snap-type: x mandatory;
 }
 
 .season-card {
-    min-width: 15em;
-    height: 12em;
-    padding: 10px;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    width: 30em;
+    height: 15em;
     text-align: center;
     img {
-        width: 10em;
-        height: 8em;
+        width: 15em;
+        height: 10em;
+    }
+    h3 {
+        margin-top: 0;
     }
 }
