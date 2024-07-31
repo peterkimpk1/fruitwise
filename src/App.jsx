@@ -7,7 +7,7 @@ import { seasonsData, allSeasonalFruitsData } from './seasonsData'
 import PopFruit from '../Components/PopFruit/PopFruit'
 import Header from '../Components/Header/Header'
 import MainPage from '../Components/MainPage/MainPage'
-
+import FruitDetail from '../Components/FruitDetail/FruitDetail'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -95,6 +95,7 @@ function App() {
     <Routes>
       <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
       <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames}/>}/>
+      <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
     </Routes>
     </>
   )

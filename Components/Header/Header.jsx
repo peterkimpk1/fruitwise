@@ -6,17 +6,17 @@ const Header = () => {
     <nav>
         <Outlet/>
         <NavLink to='/'>
-            <p>FruitWise</p>
+            <li>FruitWise</li>
         </NavLink>
         <ol className='navigation'>
             <NavLink to='/'>
-                <button>Show All</button>
+                <li>Show All</li>
             </NavLink>
             <NavLink to='/nutritiousfruits'>
-                <button>Nutritious Fruits</button>
+                <li>Nutritious Fruits</li>
             </NavLink>
             <NavLink to='/favorites'>
-                <button>Favorites</button>
+                <li>Favorites</li>
             </NavLink>
         </ol>
     </nav>

@@ -6,14 +6,15 @@
     justify-items: center;
     .card {
         text-align: center;
-        border-radius: 5px;
         box-sizing: border-box;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
         width: 20em;
-        background-color:#937055;
-        padding: 10px;
+        background-color: rgba(255,255,255,0.3);
+        backdrop-filter: blur(20px);
+        border-radius: 10px;
+        padding: 1em;
         .image-container {
             align-self: center;
             border: 1px solid white;
