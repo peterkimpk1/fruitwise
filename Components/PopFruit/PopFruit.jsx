@@ -2,18 +2,17 @@ import React from 'react'
 import CardContainer from '../CardContainer/CardContainer';
 import { useState, useEffect } from 'react';
 import {v4 as uuidv4} from 'uuid'
+import './PopFruit.css'
 const PopFruit = ({fruits,nutritionNames}) => {
   const [nutritiousFruits, setNutritiousFruits] = useState([]);
   const [nutrition, setNutrition] = useState('');
   useEffect(() => {
     getNutritiousFruits(fruits,nutrition.toLowerCase())
-    console.log(fruits)
-    console.log(nutrition.toLowerCase())
   },[nutrition])
   function getNutritiousFruits(fruits, nutritionSelection) {
     let selectNutritiousFruits = [];
     let fruitData = fruits.slice();
-    for (var i = 0; i < 11; i++) {
+    for (var i = 0; i < 20; i++) {
       let highestNutritionFruit = fruitData.reduce((acc,fruit,index) => {
         if (!acc.nutritions) {
           acc = {...fruit}
@@ -30,20 +29,21 @@ const PopFruit = ({fruits,nutritionNames}) => {
   }
   if (nutritionNames.length > 0) {
     var selections = nutritionNames.map(nutrition => {
+      let capitalNutrition = nutrition.charAt(0).toUpperCase() + nutrition.slice(1)
       return (
-        <option key={uuidv4()} value={nutrition}>{nutrition}</option>
+        <option key={uuidv4()} value={capitalNutrition}>{capitalNutrition}</option>
       )
     })
   }
 
   return (
-    <div>
+    <div className='nutrition-page'>
       <label htmlFor='nutritions'>Select a nutrition to sort by: </label>
       <select name='nutritions' value={nutrition} onChange={(e) => setNutrition(e.target.value)}>
         <option key={uuidv4()} value=''></option>
         {selections}
       </select>
-      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits}/>: <CardContainer/>}
+      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>nothing to show</p>}
     </div>
   )
 }
