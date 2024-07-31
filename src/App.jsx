@@ -14,13 +14,14 @@ function App() {
   const [seasonFruits, setSeasonFruits] = useState([]);
   const [seasonFruitCards, setSeasonFruitCards] = useState('');
   const [nutritionNames, setNutritionNames] = useState([]);
+  const [error, setError] = useState('')
   useEffect(() => {
     getFruit()
     .then(data => {
       getCurrentMonthFruits(data)
       setFruits(data)
     })
-    .catch(err => console.log(err))
+    .catch(err => setError(err.message))
   },[])
   let currentDate = moment().format('MMMM')
   
@@ -84,12 +85,13 @@ function App() {
     })
     setSeasonFruitCards(fruitCards)
     setSeasonFruits(seasonFruitsInfo);
-    setNutritionNames(fruitNutrition);
+    setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
 
   return (
     <>
     <Header/>
+    {!error && <p>{error}</p>}
     <Routes>
       <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
       <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames}/>}/>

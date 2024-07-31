@@ -8,8 +8,8 @@
         height: 5em;
         width: 22em;
         .fruit-img {
+            aspect-ratio: 4/3;
             width: 5em;
-            height: 5em;
         }
         .fruit-info {
             margin-left: 2em;
