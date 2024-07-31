@@ -77,7 +77,9 @@ function App() {
       return (
         <div className='season-card' key={fruit.id}>    
           <h3>{fruit.name}</h3>
-          <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+          <div className='season-card-image-container'>
+           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+          </div>
           <p className='high-nutrition'>{`High in: ${fruitNutrition[highestNutritionIndex]} ${highestNutrition}g `}</p>
           <p className='low-nutrition'>{`Low in: ${fruitNutrition[lowestNutritionIndex]} ${lowestNutrition}g `}</p>
         </div>  
