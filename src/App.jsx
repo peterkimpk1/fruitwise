@@ -1,3 +1,4 @@
+import './App.css'
 import React, { useEffect } from 'react'
 import PopFruit from '../Components/PopFruit/PopFruit'
 import Header from '../Components/Header/Header'
@@ -5,11 +6,23 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
 import { getFruit } from './APICall'
 import MainPage from '../Components/MainPage/MainPage'
-import './App.css'
+import moment from 'moment'
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
+  const [seasonFruits, setSeasonFruits] = useState([]);
+  const [seasonFruitCards, setSeasonFruitCards] = useState('');
+  useEffect(() => {
+    getFruit()
+    .then(data => {
+      getCurrentMonthFruits(data)
+      setFruits(data)
+    })
+    .catch(err => console.log(err))
+  },[])
+  let currentDate = moment().format('MMMM')
   const seasonsData = [
     { Winter: ['December', 'January', 'February'] },
     { Spring: ['March', 'April', 'May'] },
@@ -27,13 +40,7 @@ function App() {
     { YearRound: ['Banana', 'Lychee', 'Durian', 'Pitahaya', 'Kiwifruit',
         'Avocado', 'Jackfruit', 'Horned Melon', 'Hazelnut', 'Papaya',
         'Mangosteen', 'Annona', 'Ceylon Gooseberry']}];
-  useEffect(() => {
-    getFruit()
-    .then(data => {
-      setFruits(data)
-    })
-    .catch(err => console.log(err))
-  },[])
+
   function searchFruits(query) {
     const filteredFruits = [];
     fruits.forEach(fruit => {
@@ -58,13 +65,48 @@ function App() {
       })
       setResults(<div className='query-result'>{results}</div>)
     }
-   
   }
+  function getCurrentMonthFruits(data) {
+    let currentSeason;
+    seasonsData.forEach(season => {
+        let seasonKey = Object.keys(season)
+        if(season[seasonKey].includes(currentDate)) {
+            currentSeason = seasonKey[0]
+        }
+    })
+    const currentSeasonFruits = allSeasonalFruitsData.find(seasonalFruits => 
+        Object.keys(seasonalFruits)[0] === currentSeason
+    )
+    const seasonFruitsInfo = currentSeasonFruits[currentSeason].map(seasonFruit => {
+      let singleFruit = data.find(fruit => (fruit.name === seasonFruit) || (fruit.name === seasonFruit.split(' ').join(''))
+      )
+      return {...singleFruit}
+    })
+    const fruitNutrition = Object.keys(seasonFruitsInfo[0].nutritions).slice(1).map(nutrition => nutrition.charAt(0).toUpperCase() + nutrition.slice(1))
+    var fruitCards = seasonFruitsInfo.map(fruit => {
+      const uniqueKey = uuidv4();
+      let singleFruitNutrition = Object.values(fruit.nutritions).slice(1)
+      let lowestNutrition = Math.min(...singleFruitNutrition)
+      let lowestNutritionIndex = singleFruitNutrition.findIndex((e) => e === lowestNutrition)
+      let highestNutrition = Math.max(...singleFruitNutrition)
+      let highestNutritionIndex = singleFruitNutrition.findIndex((e) => e === highestNutrition)
+      return (
+        <div className='season-card' key={uniqueKey}>    
+          <h3>{fruit.name}</h3>
+          <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+          <p className='high-nutrition'>{`High in: ${fruitNutrition[highestNutritionIndex]} ${highestNutrition}g `}</p>
+          <p className='low-nutrition'>{`Low in: ${fruitNutrition[lowestNutritionIndex]} ${lowestNutrition}g `}</p>
+        </div>  
+      )
+    })
+    setSeasonFruitCards(fruitCards)
+    setSeasonFruits(seasonFruitsInfo);
+};
   return (
     <>
     <Header/>
     <Routes>
-      <Route path='/' element={<MainPage searchFruits={searchFruits} seasonsData={seasonsData} allSeasonalFruitsData={allSeasonalFruitsData} results={results}/>}/>
+      <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
       <Route path='/nutritiousfruits' element={<PopFruit/>}/>
     </Routes>
     </>

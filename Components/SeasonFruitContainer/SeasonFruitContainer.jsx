@@ -3,31 +3,11 @@ import './SeasonFruitContainer.css'
 import SeasonFruitCard from './SeasonFruitCard/SeasonFruitCard'
 import {useState, useEffect } from 'react'
 import moment from 'moment'
-const SeasonFruitContainer = ({seasonsData, allSeasonalFruitsData}) => {
-    const [season, setSeason] = useState('');
-    const [seasonFruits, setSeasonFruits] = useState([]);
-    let currentDate = moment().format('MMMM')
-    useEffect(() => {
-        getCurrentMonthFruits();
-    },[])
-    function getCurrentMonthFruits() {
-        let currentSeason;
-        seasonsData.forEach(season => {
-            let seasonKey = Object.keys(season)
-            if(season[seasonKey].includes(currentDate)) {
-                currentSeason = seasonKey[0]
-            }
-        })
-        const currentSeasonFruits = allSeasonalFruitsData.find(seasonalFruits => 
-            Object.keys(seasonalFruits)[0] === currentSeason
-        )
-        setSeason(Object.keys(currentSeasonFruits));
-        setSeasonFruits(currentSeasonFruits);
-    };
+const SeasonFruitContainer = ({seasonFruitCards, seasonFruits}) => {
   return (
     <div className='season-fruit-container'>
-      <h2>{currentDate}'s Seasonal Fruits</h2>
-      <SeasonFruitCard seasonFruits={seasonFruits} season={season}/>
+      <h2>{moment().format('MMMM')}'s Seasonal Fruits</h2>
+      <SeasonFruitCard seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>
     </div>
   )
 }
