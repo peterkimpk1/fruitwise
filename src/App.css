@@ -29,3 +29,9 @@
         background-color: lightgrey;
     }
 }
+.high-nutrition {
+    color: rgb(88,189,40);
+}
+.low-nutrition {
+    color: rgb(161,35,43);
+}
