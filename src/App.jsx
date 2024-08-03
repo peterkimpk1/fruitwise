@@ -60,7 +60,6 @@ function App() {
   };
 
   function getCurrentMonthFruits(data) {
-    console.log(data)
     let currentSeason;
     seasonsData.forEach(season => {
         let seasonKey = Object.keys(season)
