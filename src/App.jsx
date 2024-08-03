@@ -44,7 +44,7 @@ function App() {
         return (
           <NavLink to={`/details/${id}`} className='search-link' key={id}>
             <div className='result-card' >
-              <img className='fruit-img' src={`/src/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
+              <img className='fruit-img' src={`/public/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
               <div className='fruit-info'>
                 <p>Name: {name}</p>
                 <p>Family: {family}</p>
@@ -86,7 +86,7 @@ function App() {
         <div className='season-card' key={fruit.id}>    
           <h3>{fruit.name}</h3>
           <div className='season-card-image-container'>
-           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
+           <img src={`/public/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
           </div>
           <p className='high-nutrition' id='top-nutrition-text'>High in: {`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</p>
           <p className='low-nutrition'>Low in: {`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</p>
