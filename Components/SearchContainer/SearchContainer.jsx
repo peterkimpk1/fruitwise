@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import './SearchContainer.css'
 import AppContext from '../../Contexts/AppContext'
+import PropTypes from 'prop-types'
 const SearchContainer = ({searchFruits, results}) => {
   const [query, setQuery] = useState('');
   const submitCheck = useContext(AppContext)
@@ -18,3 +19,8 @@ const SearchContainer = ({searchFruits, results}) => {
 }
 
 export default SearchContainer
+
+SearchContainer.propTypes = {
+  searchFruits: PropTypes.func.isRequired,
+  results: PropTypes.node.isRequired
+}

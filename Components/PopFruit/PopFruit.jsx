@@ -4,6 +4,7 @@ import { useState, useEffect, useContext} from 'react';
 import {v4 as uuidv4} from 'uuid'
 import './PopFruit.css'
 import AppContext from '../../Contexts/AppContext';
+import PropTypes from 'prop-types'
 
 const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) => {
   const [nutritiousFruits, setNutritiousFruits] = useState([]);
@@ -42,7 +43,7 @@ const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) 
     <div className='nutrition-page'>
       <div>
         <label htmlFor='nutritions'>Select a nutrition to sort by </label>
-        <select name='nutritions' value={nutrition} onChange={(e) => changeNutrition(e.target.value)}>
+        <select name='nutritions' id='nutritions'value={nutrition} onChange={(e) => changeNutrition(e.target.value)}>
           <option key={uuidv4()} value=''></option>
           {selections}
         </select>
@@ -53,3 +54,22 @@ const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) 
 }
 
 export default PopFruit
+PopFruit.propTypes = {
+  fruits: PropTypes.arrayOf(PropTypes.shape({
+    family: PropTypes.string.isRequired,
+    genus: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    nutritions: PropTypes.shape({
+      carbohydrates: PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
+      sugar: PropTypes.number.isRequired,
+      protein: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+    }),
+    order: PropTypes.string.isRequired
+  })),
+  changeNutrition: PropTypes.func.isRequired,
+  nutritionNames: PropTypes.array.isRequired,
+  nutritionSelection: PropTypes.string,
+}

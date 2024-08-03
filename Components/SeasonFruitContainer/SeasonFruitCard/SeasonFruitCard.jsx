@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './SeasonFruitCard.css'
 const SeasonFruitCard = ({seasonFruitCards}) => {
@@ -10,3 +11,7 @@ const SeasonFruitCard = ({seasonFruitCards}) => {
 }
 
 export default SeasonFruitCard
+
+SeasonFruitCard.propTypes = {
+  seasonFruitCards: PropTypes.node.isRequired
+}

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import './FruitDetail.css'
+import PropTypes from 'prop-types'
+
 const FruitDetail = ({fruits}) => {
   const {id} = useParams();
 
@@ -42,3 +44,19 @@ const FruitDetail = ({fruits}) => {
 }
 
 export default FruitDetail
+FruitDetail.propTypes = {
+  fruits: PropTypes.arrayOf(PropTypes.shape({
+    family: PropTypes.string.isRequired,
+    genus: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    nutritions: PropTypes.shape({
+      carbohydrates: PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
+      sugar: PropTypes.number.isRequired,
+      protein: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+    }),
+    order: PropTypes.string.isRequired
+  })),
+}

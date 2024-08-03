@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-const Card = ({id, name,family,order,genus,nutritions,highestNutrition,lowestNutrition,highestNutritionIndex,lowestNutritionIndex, nutritionNames}) => {
+const Card = ({id, name, highestNutrition, lowestNutrition, highestNutritionIndex, lowestNutritionIndex, nutritionNames}) => {
     const capitalNutritionNames = nutritionNames.map(nutrition => nutrition.charAt(0).toUpperCase() + nutrition.slice(1))
     return (
         <div className='card'>
@@ -19,3 +20,13 @@ const Card = ({id, name,family,order,genus,nutritions,highestNutrition,lowestNut
 }
 
 export default Card
+
+Card.propTypes = {
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    highestNutrition: PropTypes.number.isRequired,
+    lowestNutrition: PropTypes.number.isRequired,
+    highestNutritionIndex: PropTypes.number.isRequired,
+    lowestNutritionIndex: PropTypes.number.isRequired,
+    nutritionNames: PropTypes.array.isRequired
+}
