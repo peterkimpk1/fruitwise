@@ -1,15 +1,15 @@
 .query-result {
     width: 24em;
-    overflow-y: scroll;
-    max-height: 15em;
+    overflow: auto;
+    max-height: 25em;
     .result-card {
         display: flex;
         padding: .5em;
         height: 5em;
         width: 22em;
         .fruit-img {
+            aspect-ratio: 4/3;
             width: 5em;
-            height: 5em;
         }
         .fruit-info {
             margin-left: 2em;
@@ -21,9 +21,8 @@
     }
 }
 .search-link:hover {
-    color: blue;
     p {
-        color: blue;
+        color: var(--main-color);
     }
     .result-card {
         background-color: lightgrey;
@@ -31,7 +30,17 @@
 }
 .high-nutrition {
     color: rgb(88,189,40);
+    font-weight: 600;
+}
+#top-nutrition-text {
+    margin-top: 5px;
+}
+.nutrition-text {
+    color: black;
+    font-weight: 500;
 }
 .low-nutrition {
-    color: rgb(161,35,43);
+    /* color: rgb(161,35,43); */
+    color: var(--main-color);
+    font-weight: 600;
 }

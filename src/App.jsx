@@ -7,20 +7,21 @@ import { seasonsData, allSeasonalFruitsData } from './seasonsData'
 import PopFruit from '../Components/PopFruit/PopFruit'
 import Header from '../Components/Header/Header'
 import MainPage from '../Components/MainPage/MainPage'
-
+import FruitDetail from '../Components/FruitDetail/FruitDetail'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
   const [seasonFruits, setSeasonFruits] = useState([]);
   const [seasonFruitCards, setSeasonFruitCards] = useState('');
   const [nutritionNames, setNutritionNames] = useState([]);
+  const [error, setError] = useState('')
   useEffect(() => {
     getFruit()
     .then(data => {
       getCurrentMonthFruits(data)
       setFruits(data)
     })
-    .catch(err => console.log(err))
+    .catch(err => setError(err.message))
   },[])
   let currentDate = moment().format('MMMM')
   
@@ -76,23 +77,27 @@ function App() {
       return (
         <div className='season-card' key={fruit.id}>    
           <h3>{fruit.name}</h3>
-          <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
-          <p className='high-nutrition'>{`High in: ${fruitNutrition[highestNutritionIndex]} ${highestNutrition}g `}</p>
-          <p className='low-nutrition'>{`Low in: ${fruitNutrition[lowestNutritionIndex]} ${lowestNutrition}g `}</p>
+          <div className='season-card-image-container'>
+           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+          </div>
+          <p className='high-nutrition' id='top-nutrition-text'>High in: <span className='nutrition-text'>{`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</span></p>
+          <p className='low-nutrition'>Low in: <span className='nutrition-text'>{`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</span></p>
         </div>  
       )
     })
     setSeasonFruitCards(fruitCards)
     setSeasonFruits(seasonFruitsInfo);
-    setNutritionNames(fruitNutrition);
+    setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
 
   return (
     <>
     <Header/>
+    {!error && <p>{error}</p>}
     <Routes>
       <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
       <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames}/>}/>
+      <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
     </Routes>
     </>
   )
