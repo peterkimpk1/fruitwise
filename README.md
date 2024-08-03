@@ -16,6 +16,9 @@ React, React Router, Cypress, JSX, CSS
 ### Screenshot of App
 ![Screenshot](https://github.com/user-attachments/assets/b63ac0c9-e35f-4398-a1fe-15dfac0ece27)
 
+### Working App
+[Click Here](https://fruitwise.vercel.app/)
+
 ### Link to Project Board
 [Project Board](https://github.com/users/peterkimpk1/projects/7)
 
