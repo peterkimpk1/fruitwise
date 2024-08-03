@@ -1,14 +1,35 @@
 nav {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 100vw;
     height: 10%;
-    background-color: rgba(147,112,85,0.5);
     align-items: center;
 }
 li {
     font-weight: 500;
     list-style-type: none;
+    color: var(--main-color);
+    display: inline-block;
+    position: relative;
+}
+li:hover {
+    cursor: pointer;
+}
+li:after{
+    content:'';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: bottom right;;
+    transition: transform 0.25s ease-out;
+}
+li:hover::after{
+    transform:scaleX(1);
+    transform-origin: bottom left;
 }
 .navigation {
     display: flex;

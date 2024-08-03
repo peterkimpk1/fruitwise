@@ -7,12 +7,15 @@
         padding: .5em;
         height: 5em;
         width: 22em;
+        border-radius: 10px;
         .fruit-img {
             aspect-ratio: 4/3;
             width: 5em;
         }
         .fruit-info {
             margin-left: 2em;
+            font-size: 1.2em;
+            line-height: 1.2;
         }
         p {
             margin: 0;
@@ -21,11 +24,25 @@
     }
 }
 .search-link:hover {
-    color: blue;
     p {
-        color: blue;
+        color: var(--main-color);
     }
     .result-card {
         background-color: lightgrey;
     }
+}
+
+#top-nutrition-text {
+    margin-top: 5px;
+}
+.nutrition-text {
+    color: black;
+    font-weight: 500;
+}
+.low-nutrition, .high-nutrition{
+    color: var(--main-color);
+    font-weight: 600;
+}
+.error-path-message {
+    margin-left: 3em;
 }

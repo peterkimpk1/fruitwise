@@ -4,21 +4,17 @@ import './Header.css'
 const Header = () => {
   return (
     <nav>
-        <Outlet/>
         <NavLink to='/'>
             <li>FruitWise</li>
         </NavLink>
-        <ol className='navigation'>
+        <ul className='navigation'>
             <NavLink to='/'>
                 <li>Show All</li>
             </NavLink>
             <NavLink to='/nutritiousfruits'>
                 <li>Nutritious Fruits</li>
             </NavLink>
-            <NavLink to='/favorites'>
-                <li>Favorites</li>
-            </NavLink>
-        </ol>
+        </ul>
     </nav>
   )
 }

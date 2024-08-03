@@ -8,6 +8,7 @@ import PopFruit from '../Components/PopFruit/PopFruit'
 import Header from '../Components/Header/Header'
 import MainPage from '../Components/MainPage/MainPage'
 import FruitDetail from '../Components/FruitDetail/FruitDetail'
+import AppContext from '../Contexts/AppContext'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -15,6 +16,9 @@ function App() {
   const [seasonFruitCards, setSeasonFruitCards] = useState('');
   const [nutritionNames, setNutritionNames] = useState([]);
   const [error, setError] = useState('')
+  const [submitted, setSubmitted] = useState(false);
+  const [nutrition, setNutrition] = useState('');
+
   useEffect(() => {
     getFruit()
     .then(data => {
@@ -25,6 +29,9 @@ function App() {
   },[])
   let currentDate = moment().format('MMMM')
   
+  function changeNutrition(nutrition) {
+    setNutrition(nutrition)
+  }
   function searchFruits(query) {
     const filteredFruits = [];
     fruits.forEach(fruit => {
@@ -47,6 +54,7 @@ function App() {
           </NavLink>
         )
       })
+      setSubmitted(true)
       setResults(<div className='query-result'>{results}</div>)
     }
   };
@@ -78,10 +86,13 @@ function App() {
         <div className='season-card' key={fruit.id}>    
           <h3>{fruit.name}</h3>
           <div className='season-card-image-container'>
-           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
           </div>
-          <p className='high-nutrition'>{`High in: ${fruitNutrition[highestNutritionIndex]} ${highestNutrition}g `}</p>
-          <p className='low-nutrition'>{`Low in: ${fruitNutrition[lowestNutritionIndex]} ${lowestNutrition}g `}</p>
+          <p className='high-nutrition' id='top-nutrition-text'>High in: {`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</p>
+          <p className='low-nutrition'>Low in: {`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</p>
+          <NavLink to={`/details/${fruit.id}`}>
+            <button>More info</button>
+          </NavLink>
         </div>  
       )
     })
@@ -92,13 +103,16 @@ function App() {
 
   return (
     <>
-    <Header/>
-    {!error && <p>{error}</p>}
-    <Routes>
-      <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
-      <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames}/>}/>
-      <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
-    </Routes>
+      <AppContext.Provider value={{nutrition,submitted}}>
+        <Header/>
+        {!error && <p>{error}</p>}
+        <Routes>
+          <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
+          <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
+          <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
+          <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
+        </Routes>
+      </AppContext.Provider>
     </>
   )
 }

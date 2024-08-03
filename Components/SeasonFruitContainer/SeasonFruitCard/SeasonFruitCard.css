@@ -2,7 +2,7 @@
     display: flex;
     overflow-x: scroll;
     width: 22em;
-    height: 20em;
+    height: 22em;
     scroll-snap-type: x mandatory;
     align-items: center;
 }
@@ -14,13 +14,13 @@
     flex-shrink: 0;
     box-sizing: border-box;
     width: 22em;
-    height: 19em;
-    text-align: center;
+    height: 21em;
     align-items: center;
-    background-color: rgba(255,255,255,0.3);
+    background-color:  rgba(58, 171, 209,0.3);
     backdrop-filter: blur(20px);
     border-radius: 10px;
     padding: 1em;
+    text-align: center;
     .season-card-image-container {
         width: 15em;
         height: 10em;
@@ -31,8 +31,14 @@
     }
     h3 {
         margin: 0 0 10px 0;
+        text-align: center;
     }
     p {
-        margin: 0;
+        margin: 0 0 0 0;
+        font-size: 1.2em;
+        line-height: 1.2;
+    }
+    p.low-nutrition {
+        margin-top: 3px;
     }
 }
