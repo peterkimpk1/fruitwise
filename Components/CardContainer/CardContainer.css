@@ -1,8 +1,7 @@
 .card-container {
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    grid-gap: 10px;
-    /* background-color: #6b522d; */
+    grid-gap: 20px;
     justify-items: center;
     .card {
         text-align: center;
@@ -33,5 +32,15 @@
             margin: 0;
         }
 
+    }
+}
+@media only screen and (max-width: 85.5em) {
+    .card-container {
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media only screen and (max-width: 63.75em) {
+    .card-container {
+        grid-template-columns: repeat(2,1fr);
     }
 }

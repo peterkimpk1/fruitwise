@@ -62,4 +62,8 @@ describe('template spec', () => {
     cy.go('back')
     cy.url().should('not.include','/nutritiousfruits')
   })
+  it('should have a different layout at 1100px width', () => {
+    cy.viewport(800,800)
+    cy.get('.main').should('have.css','flex-direction','column')
+  })
 })

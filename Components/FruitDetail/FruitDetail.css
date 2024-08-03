@@ -39,3 +39,17 @@
         }
     }
 }
+@media only screen and (max-width:75em) {
+    .detail-page {
+        flex-direction: column;
+    }
+    .detail-wrapper {
+        height: 570px;
+    }
+    .detail-wrapper,.all-info-wrapper {
+        min-width: 650px;
+    }
+    .all-info-wrapper {
+        transform: translateY(10%)
+    }
+}
