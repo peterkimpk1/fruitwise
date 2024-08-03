@@ -1,10 +1,14 @@
 describe('template spec', () => {
   let data;
+  let url;
   beforeEach(() => {
     cy.fixture('samplefruits').then((json) => {
       data = json.fruits;
     })
-    cy.intercept('https://justcors.com/tl_76fd7c9/https://fruityvice.com/api/fruit/all',data)
+    cy.fixture('cors').then(json => {
+      url = json.url
+    })
+    cy.intercept(`${url}https://fruityvice.com/api/fruit/all`,data)
     cy.viewport('macbook-13')
     cy.visit('http://localhost:5173')
   })
