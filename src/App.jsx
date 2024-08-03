@@ -8,6 +8,7 @@ import PopFruit from '../Components/PopFruit/PopFruit'
 import Header from '../Components/Header/Header'
 import MainPage from '../Components/MainPage/MainPage'
 import FruitDetail from '../Components/FruitDetail/FruitDetail'
+import AppContext from '../Contexts/AppContext'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -15,6 +16,9 @@ function App() {
   const [seasonFruitCards, setSeasonFruitCards] = useState('');
   const [nutritionNames, setNutritionNames] = useState([]);
   const [error, setError] = useState('')
+  const [submitted, setSubmitted] = useState(false);
+  const [nutrition, setNutrition] = useState('');
+
   useEffect(() => {
     getFruit()
     .then(data => {
@@ -25,6 +29,9 @@ function App() {
   },[])
   let currentDate = moment().format('MMMM')
   
+  function changeNutrition(nutrition) {
+    setNutrition(nutrition)
+  }
   function searchFruits(query) {
     const filteredFruits = [];
     fruits.forEach(fruit => {
@@ -47,6 +54,7 @@ function App() {
           </NavLink>
         )
       })
+      setSubmitted(true)
       setResults(<div className='query-result'>{results}</div>)
     }
   };
@@ -92,13 +100,15 @@ function App() {
 
   return (
     <>
-    <Header/>
-    {!error && <p>{error}</p>}
-    <Routes>
-      <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
-      <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames}/>}/>
-      <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
-    </Routes>
+      <AppContext.Provider value={{nutrition,submitted}}>
+        <Header/>
+        {!error && <p>{error}</p>}
+        <Routes>
+          <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
+          <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
+          <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
+        </Routes>
+      </AppContext.Provider>
     </>
   )
 }

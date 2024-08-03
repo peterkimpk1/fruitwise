@@ -28,9 +28,11 @@ const CardContainer = ({nutritiousFruits, nutritionNames}) => {
     })
   }
   return (
+
     <div className='card-container'>
       {nutritionCards}
     </div>
+
   )
 }
 

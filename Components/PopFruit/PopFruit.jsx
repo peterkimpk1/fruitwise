@@ -1,14 +1,16 @@
 import React from 'react'
 import CardContainer from '../CardContainer/CardContainer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import {v4 as uuidv4} from 'uuid'
 import './PopFruit.css'
-const PopFruit = ({fruits,nutritionNames}) => {
+import AppContext from '../../Contexts/AppContext';
+
+const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) => {
   const [nutritiousFruits, setNutritiousFruits] = useState([]);
-  const [nutrition, setNutrition] = useState('');
+  const {nutrition} = useContext(AppContext)
   useEffect(() => {
     getNutritiousFruits(fruits,nutrition.toLowerCase())
-  },[nutrition])
+  },[nutritionSelection])
   function getNutritiousFruits(fruits, nutritionSelection) {
     let selectNutritiousFruits = [];
     let fruitData = fruits.slice();
@@ -38,11 +40,13 @@ const PopFruit = ({fruits,nutritionNames}) => {
 
   return (
     <div className='nutrition-page'>
-      <label htmlFor='nutritions'>Select a nutrition to sort by: </label>
-      <select name='nutritions' value={nutrition} onChange={(e) => setNutrition(e.target.value)}>
-        <option key={uuidv4()} value=''></option>
-        {selections}
-      </select>
+      <div>
+        <label htmlFor='nutritions'>Select a nutrition to sort by </label>
+        <select name='nutritions' value={nutrition} onChange={(e) => changeNutrition(e.target.value)}>
+          <option key={uuidv4()} value=''></option>
+          {selections}
+        </select>
+      </div>
       {nutrition? <CardContainer nutritiousFruits={nutritiousFruits} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>nothing to show</p>}
     </div>
   )

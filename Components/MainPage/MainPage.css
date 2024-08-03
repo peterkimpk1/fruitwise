@@ -2,6 +2,7 @@
     height: 90vh;
     display: flex;
     justify-self: center;
+    min-width: 600px;
 
 }
 .reason-container {
@@ -13,6 +14,9 @@
     align-items: center;
     transform: translateX(10%);
     counter-reset: p;
+    .reason-card {
+        width:30em;
+    }
 }
 .reason-number {
     height: 25px;
@@ -22,8 +26,9 @@
     color: white;
     margin-right: 5px;
 }
-.reason-fruit {
-    line-height: 1.8;
+.reason-fruit, #fruit-reason {
+    font-size: 1.2em;
+    line-height: 2.2;
 }
 .reason-card p::before {
     content: counter(p)'.';
@@ -31,15 +36,15 @@
     background-color: var(--main-color);
     color: white;
     border-radius: 5px;
-
     padding: 7px;
-    font-weight: 500;
+    font-weight: 700;
     position: relative;
     right: 1%;
 }
 
 .eat-fruit-season-wrapper{
     width: 50vw;
+
     .eat-fruit-section {
         margin-top: 10%;
         margin-left: 20%;
@@ -58,4 +63,27 @@
 } 
 .main-header {
     text-align: center;
+}
+@media screen and (max-width: 1000px) {
+    .eat-fruit-season-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .main {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+    }
+    .eat-fruit-section {
+        position: relative;
+        margin:0;
+    }
+    .search-reason-wrapper {
+        margin-top: 10%;
+        margin-left: 20%;
+    }
 }

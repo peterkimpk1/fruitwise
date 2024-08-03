@@ -31,5 +31,12 @@
         p, h3{
             margin: 0;
         }
+        button {
+            background-color: #3aabd1;;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
     }
 }

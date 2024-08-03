@@ -5,16 +5,16 @@ import SeasonFruitContainer from '../SeasonFruitContainer/SeasonFruitContainer'
 const MainPage = ({searchFruits, results, seasonFruits, seasonFruitCards}) => {
   return (
     <div className='main'>
-      <section className='eat-fruit-season-wrapper'>
+      <div className='eat-fruit-season-wrapper'>
         <div className='eat-fruit-section'>
           <i>FIND THE FRUIT FOR YOU.</i>
           <div className='main-header-wrapper'>
             <h2>Eat Fruits, Be Healthy.</h2>
           </div>
-          <p>Fruits play an important role in your daily diet. Find fruits based on nutrition to fill your needs.</p>
+          <p id='fruit-reason'>Fruits should be an important part of your daily diet. Find fruits based on nutrition to fill your needs.</p>
         </div>
         <SearchContainer searchFruits={searchFruits} results={results}/>
-      </section>
+      </div>
       <div className='search-reason-wrapper'>
         <SeasonFruitContainer seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>
         <section className='reason-section'>
