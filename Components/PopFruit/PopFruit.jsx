@@ -48,7 +48,7 @@ const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) 
           {selections}
         </select>
       </div>
-      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>nothing to show</p>}
+      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>Choose a nutrition from the drop-down</p>}
     </div>
   )
 }

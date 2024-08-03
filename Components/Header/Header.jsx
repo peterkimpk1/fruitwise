@@ -4,7 +4,6 @@ import './Header.css'
 const Header = () => {
   return (
     <nav>
-        <Outlet/>
         <NavLink to='/'>
             <li>FruitWise</li>
         </NavLink>
@@ -14,9 +13,6 @@ const Header = () => {
             </NavLink>
             <NavLink to='/nutritiousfruits'>
                 <li>Nutritious Fruits</li>
-            </NavLink>
-            <NavLink to='/favorites'>
-                <li>Favorites</li>
             </NavLink>
         </ul>
     </nav>
