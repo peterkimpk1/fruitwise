@@ -86,10 +86,13 @@ function App() {
         <div className='season-card' key={fruit.id}>    
           <h3>{fruit.name}</h3>
           <div className='season-card-image-container'>
-           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`}/>
+           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
           </div>
-          <p className='high-nutrition' id='top-nutrition-text'>High in: <span className='nutrition-text'>{`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</span></p>
-          <p className='low-nutrition'>Low in: <span className='nutrition-text'>{`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</span></p>
+          <p className='high-nutrition' id='top-nutrition-text'>High in: {`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</p>
+          <p className='low-nutrition'>Low in: {`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</p>
+          <NavLink to={`/details/${fruit.id}`}>
+            <button>More info</button>
+          </NavLink>
         </div>  
       )
     })

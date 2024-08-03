@@ -31,10 +31,7 @@
         background-color: lightgrey;
     }
 }
-.high-nutrition {
-    color: rgb(88,189,40);
-    font-weight: 600;
-}
+
 #top-nutrition-text {
     margin-top: 5px;
 }
@@ -42,8 +39,7 @@
     color: black;
     font-weight: 500;
 }
-.low-nutrition {
-    /* color: rgb(161,35,43); */
+.low-nutrition, .high-nutrition{
     color: var(--main-color);
     font-weight: 600;
 }

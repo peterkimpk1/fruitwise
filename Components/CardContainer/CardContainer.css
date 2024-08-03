@@ -11,7 +11,8 @@
         justify-content: space-around;
         flex-direction: column;
         width: 20em;
-        background-color: rgba(255,255,255,0.3);
+        /* background-color: rgba(255,255,255,0.3); */
+        background-color:  rgba(58, 171, 209,0.3);
         backdrop-filter: blur(20px);
         border-radius: 10px;
         padding: 1em;
@@ -31,12 +32,6 @@
         p, h3{
             margin: 0;
         }
-        button {
-            background-color: #3aabd1;;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: none;
-        }
+
     }
 }
