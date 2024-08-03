@@ -43,3 +43,6 @@
     color: var(--main-color);
     font-weight: 600;
 }
+.error-path-message {
+    margin-left: 3em;
+}

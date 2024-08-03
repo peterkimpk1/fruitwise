@@ -60,6 +60,7 @@ function App() {
   };
 
   function getCurrentMonthFruits(data) {
+    console.log(data)
     let currentSeason;
     seasonsData.forEach(season => {
         let seasonKey = Object.keys(season)
@@ -110,6 +111,7 @@ function App() {
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
           <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
+          <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
         </Routes>
       </AppContext.Provider>
     </>
