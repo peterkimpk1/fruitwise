@@ -1,0 +1,14 @@
+{
+    "name": "Persimmon",
+    "id": 52,
+    "family": "Ebenaceae",
+    "order": "Rosales",
+    "genus": "Diospyros",
+    "nutritions": {
+        "calories": 81,
+        "fat": 0.0,
+        "sugar": 18.0,
+        "carbohydrates": 18.0,
+        "protein": 0.0
+    }
+}
