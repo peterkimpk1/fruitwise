@@ -8,7 +8,7 @@ const Card = ({id, name, highestNutrition, lowestNutrition, highestNutritionInde
         <div className='card'>
         <h3>{name}</h3>
         <div className='image-container'>
-            <img src={`../../../public/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
+            <img src={`../../../assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
         </div>
         <p className='high-nutrition'>{`High in: ${capitalNutritionNames[highestNutritionIndex+1]} ${highestNutrition}g`} </p>
         <p className='low-nutrition'>{`Low in: ${capitalNutritionNames[lowestNutritionIndex+1]} ${lowestNutrition}g`} </p>
