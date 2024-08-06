@@ -1,5 +1,6 @@
 describe('template spec', () => {
   let data;
+  let url;
   beforeEach(() => {
     cy.fixture('samplefruits').then((json) => {
       data = json.fruits;
