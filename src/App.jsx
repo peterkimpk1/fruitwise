@@ -105,7 +105,7 @@ function App() {
     <>
       <AppContext.Provider value={{nutrition,submitted}}>
         <Header/>
-        {!error && <p>{error}</p>}
+        {error && <p>{error}</p>}
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
           <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
