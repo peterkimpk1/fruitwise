@@ -12,7 +12,7 @@ describe('template spec', () => {
     })
     it('should resize when it reaches breakpoint', () => {
         cy.viewport(1200,800)
-        cy.intercept(`${url}https://fruityvice.com/api/fruit/all`,data)
+        cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
         cy.visit('http://localhost:5173')
         cy.get('.search-bar').click().type('banana')
         cy.get('.search-btn').click()

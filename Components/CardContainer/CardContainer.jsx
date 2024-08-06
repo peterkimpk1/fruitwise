@@ -4,7 +4,6 @@ import './CardContainer.css'
 import PropTypes from 'prop-types'
 
 const CardContainer = ({nutritiousFruits, nutritionNames}) => {
-  console.log(nutritiousFruits)
   if (nutritiousFruits.length > 0) {
     var nutritionCards = nutritiousFruits.map(({name,id,family,order,genus,nutritions}) => {
       let singleFruitNutrition = Object.values(nutritions).slice(1)

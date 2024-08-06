@@ -12,7 +12,7 @@ describe('template spec', () => {
 
   })
   it('should be able to render nutrition cards based on selection', () => {
-    cy.intercept(`${url}https://fruityvice.com/api/fruit/all`,data)
+    cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
     cy.visit('http://localhost:5173/')
     cy.get('[href="/nutritiousfruits"] > li').click()
     cy.get('#nutritions').select([1])
@@ -20,7 +20,7 @@ describe('template spec', () => {
     cy.get('.card-container .card h3').first().should('contain.text','Hazelnut')
   })
   it('should be able to render nutrition cards based on another', () => {
-    cy.intercept(`${url}https://fruityvice.com/api/fruit/all`,data)
+    cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
     cy.visit('http://localhost:5173/')
     cy.get('[href="/nutritiousfruits"] > li').click()
     cy.get('#nutritions').select([3])
@@ -28,7 +28,7 @@ describe('template spec', () => {
     cy.get('.card-container .card h3').first().should('contain.text','Jackfruit')
   })
   it('should be able to go to detailed page based on fruit selection', () => {
-    cy.intercept(`${url}https://fruityvice.com/api/fruit/all`,data)
+    cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
     cy.visit('http://localhost:5173/')
     cy.get('[href="/nutritiousfruits"] > li').click()
     cy.get('#nutritions').select([3])
@@ -39,7 +39,7 @@ describe('template spec', () => {
     cy.get('.all-info-wrapper > :nth-child(2)').should('exist')
   })
   it('should go to 3 columns when it reaches first breakpoint', () => {
-    cy.intercept(`${url}https://fruityvice.com/api/fruit/all`,data)
+    cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
     cy.visit('http://localhost:5173/')
     cy.get('[href="/nutritiousfruits"] > li').click()
     cy.get('#nutritions').select([3])
@@ -47,7 +47,7 @@ describe('template spec', () => {
     cy.get('.card-container').should('have.css','grid-template-columns','320px 320px 320px')
   })
   it('should go to 2 columns when it reaches second breakpoint', () => {
-    cy.intercept(`${url}https://fruityvice.com/api/fruit/all`,data)
+    cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
     cy.visit('http://localhost:5173/')
     cy.get('[href="/nutritiousfruits"] > li').click()
     cy.get('#nutritions').select([3])
