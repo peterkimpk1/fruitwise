@@ -18,7 +18,7 @@ const FruitDetail = ({fruits}) => {
           <div className='detail-container'>
             <h3>Fruit Name: {name}</h3>
             <div className='detail-image'>
-              <img src={`../../assets/${name}.jpg`} alt={`Picture of ${name}`}/><span>*Picture may not reflect fruit details*</span>
+              <img src={`../../../assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/><span>*Picture may not reflect fruit details*</span>
             </div>
           </div>
         </div>
