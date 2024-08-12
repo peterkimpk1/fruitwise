@@ -27,3 +27,15 @@ select:hover, select:focus-within {
 select::after {
     width: fit-content;
 }
+.show-more-btn {
+    margin: 2em;
+}
+.fruitcard-number {
+    margin: 1em 0 1em 0;
+    font-size: 1.4em;
+    transform: translateY(-40%)
+}
+#end-list-msg {
+    margin: 1em 0 1em 0;
+    font-size: 1.4em;
+}
