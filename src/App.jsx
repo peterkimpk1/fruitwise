@@ -9,6 +9,7 @@ import Header from '../Components/Header/Header'
 import MainPage from '../Components/MainPage/MainPage'
 import FruitDetail from '../Components/FruitDetail/FruitDetail'
 import AppContext from '../Contexts/AppContext'
+import Loading from '../Components/Loading/Loading'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -18,12 +19,15 @@ function App() {
   const [error, setError] = useState('')
   const [submitted, setSubmitted] = useState(false);
   const [nutrition, setNutrition] = useState('');
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     getFruit()
     .then(data => {
       getCurrentMonthFruits(data)
       setFruits(data)
+      setTimeout(() => {
+        setIsLoading(false)
+      },1000)
     })
     .catch(err => setError(err.message))
   },[])
@@ -105,13 +109,14 @@ function App() {
     <>
       <AppContext.Provider value={{nutrition,submitted}}>
         <Header/>
-        {error && <p>{error}</p>}
-        <Routes>
+        {error && <p className='error-msg'>{error}</p>}
+        {isLoading? <Loading/> : <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
           <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
           <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
-        </Routes>
+        </Routes>}
+        
       </AppContext.Provider>
     </>
   )

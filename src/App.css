@@ -31,7 +31,10 @@
         background-color: lightgrey;
     }
 }
-
+.error-msg {
+    text-align: center;
+    font-size: 1.4em;
+}
 #top-nutrition-text {
     margin-top: 5px;
 }

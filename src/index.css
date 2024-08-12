@@ -27,8 +27,9 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.1em;
+  margin: 0.5em 0 0.5em 0;
+  /* line-height: 1.1; */
 }
 
 h2 {
@@ -42,11 +43,11 @@ h3 {
 }
 button {
   background-color: #3aabd1;;
-  color: white;
+  color: black;
   padding: 6px 12px;
   border-radius: 5px;
   border: none;
-  margin-top: 10px;
+  margin-top: 1em;
 }
 button:hover{
   cursor: pointer;

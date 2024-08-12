@@ -2,8 +2,8 @@
     height: 90vh;
     display: flex;
     justify-self: center;
-    min-width: 600px;
-
+    min-width: 37.5em;
+    min-height: auto;
 }
 .reason-container {
     position: relative;
@@ -15,6 +15,7 @@
     transform: translateX(10%);
     counter-reset: p;
     .reason-card {
+        min-width: 15em;
         width:35em;
     }
 }
@@ -84,6 +85,19 @@
     }
     .eat-fruit-section,.search-container-submitted, .search-container {
         margin-right: 20%;
+    }
+
+}
+@media only screen and (max-width: 550px) {
+    .eat-fruit-season-wrapper{
+        transform: translateX(-10%)
+    }
+    .search-reason-wrapper {
+        transform: translateX(-25%)
+    }
+    .reason-fruit{
+        width: 20em;
+        transform: translateX(15%)
     }
 
 }

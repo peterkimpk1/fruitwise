@@ -1,6 +1,7 @@
 .season-cards-container {
     display: flex;
     overflow-x: scroll;
+    overflow-y: hidden;
     width: 22em;
     height: 22em;
     scroll-snap-type: x mandatory;
@@ -19,7 +20,7 @@
     background-color:  rgba(58, 171, 209,0.3);
     backdrop-filter: blur(20px);
     border-radius: 10px;
-    padding: 1em;
+    padding-top: .5em;
     text-align: center;
     .season-card-image-container {
         width: 15em;
