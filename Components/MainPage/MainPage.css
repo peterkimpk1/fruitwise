@@ -2,8 +2,6 @@
     height: 90vh;
     display: flex;
     justify-self: center;
-    min-width: 37.5em;
-    min-height: auto;
 }
 .reason-container {
     position: relative;
@@ -14,10 +12,6 @@
     align-items: center;
     transform: translateX(10%);
     counter-reset: p;
-    .reason-card {
-        min-width: 15em;
-        width:35em;
-    }
 }
 .reason-number {
     height: 25px;
@@ -42,7 +36,10 @@
     position: relative;
     right: 1%;
 }
-
+.reason-card {
+    display: flex;
+    max-width: 35em;
+}
 .eat-fruit-season-wrapper{
     width: 50%;
 
@@ -79,7 +76,7 @@
         justify-content: center;
         height: auto;
         .search-container-submitted, .search-container{
-            width: 28em;
+            width: max-content;
             margin-top: 0;
         }
     }
@@ -89,15 +86,7 @@
 
 }
 @media only screen and (max-width: 550px) {
-    .eat-fruit-season-wrapper{
-        transform: translateX(-10%)
-    }
-    .search-reason-wrapper {
-        transform: translateX(-25%)
-    }
     .reason-fruit{
-        width: 20em;
-        transform: translateX(15%)
+        min-width: 13.75em;
     }
-
 }

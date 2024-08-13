@@ -35,4 +35,6 @@ li:hover::after{
     display: flex;
     justify-content: space-around;
     width: 30em;
+    margin: 1em 0 1em 0;
 }
+

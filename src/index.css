@@ -6,6 +6,7 @@
   line-height: 1.5;
   font-weight: 500;
   --main-color: rgb(128, 33, 78);
+  --button-color: rgba(58, 171, 209, 0.6);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -42,17 +43,31 @@ h3 {
   font-size: 2.2em;
 }
 button {
-  background-color: #3aabd1;;
+  background-color: var(--button-color);
   color: black;
-  padding: 6px 12px;
+  padding: .375em .75em;
   border-radius: 5px;
   border: none;
-  margin-top: 1em;
+  margin: 1.25em;
+  font-size: 1.2em;
 }
-button:hover{
+button:hover {
   cursor: pointer;
   box-shadow: 4px 4px 6px 0 rgba(255,255,255,.3),
   -4px -4px 6px 0 rgba(116, 125, 136, .2), 
 inset -4px -4px 6px 0 rgba(255,255,255,.2),
 inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
 }
+/* *::-webkit-scrollbar {
+  width: 1.75em;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--button-color);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 5px;
+} */

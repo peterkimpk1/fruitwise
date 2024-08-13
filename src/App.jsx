@@ -95,7 +95,7 @@ function App() {
           <p className='high-nutrition' id='top-nutrition-text'>High in: {`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</p>
           <p className='low-nutrition'>Low in: {`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</p>
           <NavLink to={`/details/${fruit.id}`}>
-            <button>More info</button>
+            <button className='more-info-btn'>More info</button>
           </NavLink>
         </div>  
       )
