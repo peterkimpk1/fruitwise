@@ -17,7 +17,7 @@ input {
    font-size: 1.1em;
   }
 .search-container-submitted {
-   width: fit-content;
+   width: max-content;
    background-color: rgba(58, 171, 209,0.3);
    height: fit-content;
    padding: 2%;

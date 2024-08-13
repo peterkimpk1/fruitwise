@@ -8,7 +8,7 @@ const SearchContainer = ({searchFruits, results}) => {
   const submitCheck = useContext(AppContext)
   return (
       <div className={!submitCheck.submitted ? "search-container":"search-container-submitted"}>
-        <div>
+        <div className='search-inputs-wrapper'>
           <input className='search-bar' placeholder='Search Fruit Names' value={query} onChange={(e) => setQuery(e.target.value)} autoFocus></input>
           <button className='search-btn' onClick={() => searchFruits(query)}>Search</button>
         </div>

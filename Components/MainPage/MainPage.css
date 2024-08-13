@@ -62,7 +62,7 @@
 .main-header {
     text-align: center;
 }
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1150px) {
     .eat-fruit-season-wrapper {
         position: relative;
         display: flex;
@@ -89,4 +89,14 @@
     .reason-fruit{
         min-width: 13.75em;
     }
+    .search-bar {
+        width: 12em;
+    }
+    .query-result {
+        width: 22em;
+        .result-card {
+            width: 19em;
+        }
+    }
+
 }
