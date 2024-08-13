@@ -1,12 +1,12 @@
 .query-result {
-    width: 24em;
+    width: 28em;
     overflow: auto;
     max-height: 25em;
     .result-card {
         display: flex;
         padding: .5em;
         height: 5em;
-        width: 22em;
+        width: 25em;
         border-radius: 10px;
         .fruit-img {
             aspect-ratio: 4/3;
@@ -18,7 +18,7 @@
             line-height: 1.2;
         }
         p {
-            margin: 0;
+            margin: 0 0 0 0em;
             color: black;
         }
     }
@@ -31,10 +31,11 @@
         background-color: lightgrey;
     }
 }
-
-#top-nutrition-text {
-    margin-top: 5px;
+.error-msg {
+    text-align: center;
+    font-size: 1.4em;
 }
+
 .nutrition-text {
     color: black;
     font-weight: 500;

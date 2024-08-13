@@ -7,14 +7,14 @@ const Header = () => {
         <NavLink to='/'>
             <li>FruitWise</li>
         </NavLink>
-        <ul className='navigation'>
+        <div className='navigation'>
             <NavLink to='/'>
                 <li>Show All</li>
             </NavLink>
             <NavLink to='/nutritiousfruits'>
                 <li>Nutritious Fruits</li>
             </NavLink>
-        </ul>
+        </div>
     </nav>
   )
 }

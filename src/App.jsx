@@ -9,6 +9,7 @@ import Header from '../Components/Header/Header'
 import MainPage from '../Components/MainPage/MainPage'
 import FruitDetail from '../Components/FruitDetail/FruitDetail'
 import AppContext from '../Contexts/AppContext'
+import Loading from '../Components/Loading/Loading'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -18,12 +19,15 @@ function App() {
   const [error, setError] = useState('')
   const [submitted, setSubmitted] = useState(false);
   const [nutrition, setNutrition] = useState('');
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     getFruit()
     .then(data => {
       getCurrentMonthFruits(data)
       setFruits(data)
+      setTimeout(() => {
+        setIsLoading(false)
+      },1000)
     })
     .catch(err => setError(err.message))
   },[])
@@ -44,7 +48,7 @@ function App() {
         return (
           <NavLink to={`/details/${id}`} className='search-link' key={id}>
             <div className='result-card' >
-              <img className='fruit-img' src={`/src/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
+              <img className='fruit-img' src={`/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
               <div className='fruit-info'>
                 <p>Name: {name}</p>
                 <p>Family: {family}</p>
@@ -86,12 +90,12 @@ function App() {
         <div className='season-card' key={fruit.id}>    
           <h3>{fruit.name}</h3>
           <div className='season-card-image-container'>
-           <img src={`/src/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
+           <img src={`/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
           </div>
           <p className='high-nutrition' id='top-nutrition-text'>High in: {`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</p>
           <p className='low-nutrition'>Low in: {`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</p>
           <NavLink to={`/details/${fruit.id}`}>
-            <button>More info</button>
+            <button className='more-info-btn'>More info</button>
           </NavLink>
         </div>  
       )
@@ -105,13 +109,14 @@ function App() {
     <>
       <AppContext.Provider value={{nutrition,submitted}}>
         <Header/>
-        {error && <p>{error}</p>}
-        <Routes>
+        {error && <p className='error-msg'>{error}</p>}
+        {isLoading? <Loading/> : <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
           <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
           <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
-        </Routes>
+        </Routes>}
+        
       </AppContext.Provider>
     </>
   )

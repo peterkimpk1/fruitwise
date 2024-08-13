@@ -5,17 +5,28 @@ import {v4 as uuidv4} from 'uuid'
 import './PopFruit.css'
 import AppContext from '../../Contexts/AppContext';
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) => {
   const [nutritiousFruits, setNutritiousFruits] = useState([]);
+  const [allFruitCards, setAllFruitCards] = useState(false);
+  const [fruitCards, setFruitCards] = useState(20);
   const {nutrition} = useContext(AppContext)
   useEffect(() => {
     getNutritiousFruits(fruits,nutrition.toLowerCase())
   },[nutritionSelection])
+  if (nutritionNames.length > 0) {
+    var selections = nutritionNames.map(nutrition => {
+      let capitalNutrition = nutrition.charAt(0).toUpperCase() + nutrition.slice(1)
+      return (
+        <option key={uuidv4()} value={capitalNutrition}>{capitalNutrition}</option>
+      )
+    })
+  }
   function getNutritiousFruits(fruits, nutritionSelection) {
     let selectNutritiousFruits = [];
     let fruitData = fruits.slice();
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < fruits.length; i++) {
       let highestNutritionFruit = fruitData.reduce((acc,fruit,index) => {
         if (!acc.nutritions) {
           acc = {...fruit}
@@ -28,17 +39,14 @@ const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) 
       selectNutritiousFruits.push(highestNutritionFruit)
       fruitData.splice(highestNutritionFruit.index,1)
     }
+    setAllFruitCards(false)
+    setFruitCards(20)
     setNutritiousFruits(selectNutritiousFruits)
   }
-  if (nutritionNames.length > 0) {
-    var selections = nutritionNames.map(nutrition => {
-      let capitalNutrition = nutrition.charAt(0).toUpperCase() + nutrition.slice(1)
-      return (
-        <option key={uuidv4()} value={capitalNutrition}>{capitalNutrition}</option>
-      )
-    })
+  function showMore() {
+    setAllFruitCards(true)
+    setFruitCards(fruits.length)
   }
-
   return (
     <div className='nutrition-page'>
       <div>
@@ -48,7 +56,9 @@ const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) 
           {selections}
         </select>
       </div>
-      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>Choose a nutrition from the drop-down</p>}
+      {nutrition? <p className='fruitcard-number'>{`Showing ${fruitCards}/${fruits.length} Fruits`}</p> : null}
+      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits.slice(0,fruitCards)} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>Choose a nutrition from the drop-down</p>}
+      {!allFruitCards? <button className='show-more-btn' onClick={showMore}>Show More..</button> : <p id='end-list-msg'>You've reached the end of the list.</p>}
     </div>
   )
 }

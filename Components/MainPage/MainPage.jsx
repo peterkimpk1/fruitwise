@@ -11,7 +11,7 @@ const MainPage = ({searchFruits, results, seasonFruits, seasonFruitCards}) => {
         <div className='eat-fruit-section'>
           <i>FIND THE FRUIT FOR YOU.</i>
           <div className='main-header-wrapper'>
-            <h2>Eat Fruits, Be Healthy.</h2>
+            <h1>Eat Fruits, Be Healthy.</h1>
           </div>
           <p id='fruit-reason'>Fruits should be an important part of your daily diet. Find fruits based on nutrition to fill your needs.</p>
         </div>
