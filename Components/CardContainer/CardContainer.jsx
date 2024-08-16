@@ -3,7 +3,7 @@ import Card from './Card/Card'
 import './CardContainer.css'
 import PropTypes from 'prop-types'
 
-const CardContainer = ({nutritiousFruits, nutritionNames}) => {
+const CardContainer = ({nutritiousFruits, nutritionNames,toggleFavorite}) => {
   if (nutritiousFruits.length > 0) {
     var nutritionCards = nutritiousFruits.map(({name,id,family,order,genus,nutritions}) => {
       let singleFruitNutrition = Object.values(nutritions).slice(1)
@@ -25,6 +25,7 @@ const CardContainer = ({nutritiousFruits, nutritionNames}) => {
         lowestNutritionIndex={lowestNutritionIndex}
         nutritions={nutritions}
         nutritionNames={nutritionNames}
+        toggleFavorite={toggleFavorite}
         />
       )
     })

@@ -10,6 +10,8 @@ import MainPage from '../Components/MainPage/MainPage'
 import FruitDetail from '../Components/FruitDetail/FruitDetail'
 import AppContext from '../Contexts/AppContext'
 import Loading from '../Components/Loading/Loading'
+import Favorite from '../Components/Favorite/Favorite'
+
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -20,14 +22,13 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [nutrition, setNutrition] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
   useEffect(() => {
     getFruit()
     .then(data => {
       getCurrentMonthFruits(data)
       setFruits(data)
-      setTimeout(() => {
-        setIsLoading(false)
-      },1000)
+      setIsLoading(false)
     })
     .catch(err => setError(err.message))
   },[])
@@ -35,6 +36,11 @@ function App() {
   
   function changeNutrition(nutrition) {
     setNutrition(nutrition)
+  }
+  function toggleFavorite(e) {
+    console.log(e.target.parentNode)
+    const newFavorite = isFavorite === false ? true : false;
+    setIsFavorite(newFavorite);
   }
   function searchFruits(query) {
     const filteredFruits = [];
@@ -107,16 +113,17 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted}}>
+      <AppContext.Provider value={{nutrition,submitted,isFavorite}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
-        {isLoading? <Loading/> : <Routes>
+        {isLoading? <Loading/> : 
+        <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
-          <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
+          <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
+          <Route path='/favorites' element={<Favorite/>}/>
           <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
         </Routes>}
-        
       </AppContext.Provider>
     </>
   )

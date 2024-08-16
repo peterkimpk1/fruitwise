@@ -7,7 +7,7 @@ import AppContext from '../../Contexts/AppContext';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) => {
+const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition, toggleFavorite}) => {
   const [nutritiousFruits, setNutritiousFruits] = useState([]);
   const [allFruitCards, setAllFruitCards] = useState(false);
   const [fruitCards, setFruitCards] = useState(20);
@@ -57,7 +57,7 @@ const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) 
         </select>
       </div>
       {nutrition? <p className='fruitcard-number'>{`Showing ${fruitCards}/${fruits.length} Fruits`}</p> : null}
-      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits.slice(0,fruitCards)} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>Choose a nutrition from the drop-down</p>}
+      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits.slice(0,fruitCards)} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>: <p className='no-selection-message'>Choose a nutrition from the drop-down</p>}
       {!allFruitCards? <button className='show-more-btn' onClick={showMore}>Show More..</button> : <p id='end-list-msg'>You've reached the end of the list.</p>}
     </div>
   )
