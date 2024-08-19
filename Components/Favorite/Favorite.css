@@ -1,0 +1,5 @@
+.favorite-container {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+}

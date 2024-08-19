@@ -125,15 +125,15 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted}}>
+      <AppContext.Provider value={{nutrition,submitted,fruits}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
         {isLoading? <Loading/> : 
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
-          <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
+          <Route path='/nutritiousfruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
-          <Route path='/favorites' element={<Favorite/>}/>
+          <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
           <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
         </Routes>}
       </AppContext.Provider>

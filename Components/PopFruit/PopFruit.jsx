@@ -7,10 +7,11 @@ import AppContext from '../../Contexts/AppContext';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition, toggleFavorite}) => {
+const PopFruit = ({nutritionNames, nutritionSelection, changeNutrition, toggleFavorite}) => {
   const [nutritiousFruits, setNutritiousFruits] = useState([]);
   const [allFruitCards, setAllFruitCards] = useState(false);
   const [fruitCards, setFruitCards] = useState(20);
+  const {fruits} = useContext(AppContext)
   const {nutrition} = useContext(AppContext)
   useEffect(() => {
     getNutritiousFruits(fruits,nutrition.toLowerCase())
