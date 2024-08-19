@@ -4,7 +4,7 @@ import SearchContainer from '../SearchContainer/SearchContainer'
 import SeasonFruitContainer from '../SeasonFruitContainer/SeasonFruitContainer'
 import PropTypes from 'prop-types'
 
-const MainPage = ({searchFruits, results, seasonFruits, seasonFruitCards}) => {
+const MainPage = ({searchFruits, results, seasonFruits, toggleFavorite, nutritionNames}) => {
   return (
     <div className='main'>
       <div className='eat-fruit-season-wrapper'>
@@ -18,7 +18,7 @@ const MainPage = ({searchFruits, results, seasonFruits, seasonFruitCards}) => {
         <SearchContainer searchFruits={searchFruits} results={results}/>
       </div>
       <div className='search-reason-wrapper'>
-        <SeasonFruitContainer seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>
+        <SeasonFruitContainer seasonFruits={seasonFruits} toggleFavorite={toggleFavorite} nutritionNames={nutritionNames}/>
         <section className='reason-section'>
           <h2 className='main-header'>Why fruits?</h2>
           <div className='reason-container'>
@@ -48,7 +48,6 @@ export default MainPage
 MainPage.propTypes = {
   searchFruits: PropTypes.func.isRequired,
   results: PropTypes.node.isRequired,
-  seasonFruitCards: PropTypes.node.isRequired,
   seasonFruits: PropTypes.arrayOf(PropTypes.shape({
     family: PropTypes.string.isRequired,
     genus: PropTypes.string.isRequired,
