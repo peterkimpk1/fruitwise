@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Card.css'
@@ -35,5 +35,7 @@ Card.propTypes = {
     lowestNutrition: PropTypes.number.isRequired,
     highestNutritionIndex: PropTypes.number.isRequired,
     lowestNutritionIndex: PropTypes.number.isRequired,
-    nutritionNames: PropTypes.array.isRequired
+    nutritionNames: PropTypes.array.isRequired,
+    toggleFavorite: PropTypes.func.isRequired,
+    isFavorite: PropTypes.bool.isRequired
 }

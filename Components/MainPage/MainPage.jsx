@@ -61,5 +61,6 @@ MainPage.propTypes = {
       fat: PropTypes.number.isRequired,
     }),
     order: PropTypes.string.isRequired
-  }))
+  })),
+  toggleFavorite: PropTypes.func.isRequired
 }

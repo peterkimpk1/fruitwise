@@ -1,5 +1,7 @@
 import React from 'react'
 import './SeasonFruitContainer.css'
+import './SeasonFruitCard/SeasonFruitCard.css'
+import '../../Components/CardContainer/CardContainer.css'
 import CardContainer from '../CardContainer/CardContainer'
 import moment from 'moment'
 import PropTypes from 'prop-types'
@@ -7,7 +9,9 @@ const SeasonFruitContainer = ({seasonFruits, nutritionNames, toggleFavorite}) =>
   return (
     <div className='season-fruit-container'>
       <h2>{moment().format('MMMM')}'s Seasonal Fruits</h2>
-      <CardContainer nutritiousFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>
+      <div className='season-cards-container'>
+        <CardContainer nutritiousFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>
+      </div>
       {/* <button className='direction-btn'>Left</button>
       <button className='direction-btn'>Right</button> */}
     </div>
@@ -30,5 +34,6 @@ SeasonFruitContainer.propTypes = {
       fat: PropTypes.number.isRequired,
     }),
     order: PropTypes.string.isRequired
-  }))
+  })),
+  toggleFavorite: PropTypes.func.isRequired
 }

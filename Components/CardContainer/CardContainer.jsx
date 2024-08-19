@@ -31,11 +31,8 @@ const CardContainer = ({nutritiousFruits, nutritionNames,toggleFavorite}) => {
       )
     })
   }
-  return (
-    <div className='card-container'>
-      {nutritionCards}
-    </div>
-  )
+  return nutritionCards
+  
 }
 
 export default CardContainer
@@ -53,6 +50,8 @@ CardContainer.propTypes = {
       protein: PropTypes.number.isRequired,
       fat: PropTypes.number.isRequired,
     }),
-    order: PropTypes.string.isRequired
+    order: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired
   })),
+  toggleFavorite: PropTypes.func.isRequired
 }

@@ -38,6 +38,7 @@ function App() {
   function changeNutrition(nutrition) {
     setNutrition(nutrition)
   }
+  
   function toggleFavorite(e) {
     console.log(e.target.parentNode.parentNode)
     const updateFruits = fruits.slice()
@@ -61,6 +62,7 @@ function App() {
     }
     e.target.className = toggleClass
   }
+
   function searchFruits(query) {
     const filteredFruits = [];
     fruits.forEach(fruit => {
@@ -105,32 +107,6 @@ function App() {
       return {...singleFruit}
     })
     const fruitNutrition = Object.keys(seasonFruitsInfo[0].nutritions).slice(1).map(nutrition => nutrition.charAt(0).toUpperCase() + nutrition.slice(1))
-    // var fruitCards = seasonFruitsInfo.map(fruit => {
-    //   let singleFruitNutrition = Object.values(fruit.nutritions).slice(1)
-    //   let lowestNutrition = Math.min(...singleFruitNutrition)
-    //   let lowestNutritionIndex = singleFruitNutrition.findIndex((e) => e === lowestNutrition)
-    //   let highestNutrition = Math.max(...singleFruitNutrition)
-    //   let highestNutritionIndex = singleFruitNutrition.findIndex((e) => e === highestNutrition)
-    //   return (
-    //     <div className='season-card' key={fruit.id} id={fruit.id}> 
-    //      <div className={fruit.isFavorite? 'favorite-icon-container':'not-favorite-icon-container'} id='favorite-fruit' onClick={toggleFavorite}>
-    //             <img className={'not-favorite-icon-container'} src={'../../../assets/star.svg'}/>
-    //       </div>
-    //       <div>
-    //         <h3>{fruit.name}</h3>
-    //         <div className='season-card-image-container'>
-    //         <img className='season-fruit-img' src={`/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
-    //         </div>
-    //         <p className='high-nutrition' id='top-nutrition-text'>High in: {`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</p>
-    //         <p className='low-nutrition'>Low in: {`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</p>
-    //         <NavLink to={`/details/${fruit.id}`}>
-    //           <button className='more-info-btn'>More info</button>
-    //         </NavLink>
-    //       </div>   
-    //     </div>  
-    //   )
-    // })
-    // setSeasonFruitCards(fruitCards)
     setSeasonFruits(seasonFruitsInfo);
     setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
