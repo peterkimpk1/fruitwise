@@ -22,12 +22,14 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [nutrition, setNutrition] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(false);
   useEffect(() => {
     getFruit()
     .then(data => {
       getCurrentMonthFruits(data)
-      setFruits(data)
+      const favFruits = data.map(fruit => {
+        return {...fruit,isFavorite: false}
+      })
+      setFruits(favFruits)
       setIsLoading(false)
     })
     .catch(err => setError(err.message))
@@ -38,9 +40,19 @@ function App() {
     setNutrition(nutrition)
   }
   function toggleFavorite(e) {
-    console.log(e.target.parentNode)
-    const newFavorite = isFavorite === false ? true : false;
-    setIsFavorite(newFavorite);
+    const updateFruits = fruits.slice()
+    const favIndex = updateFruits.findIndex(fruit => fruit.id === +e.target.parentNode.parentNode.id)
+    const newFavorite = updateFruits[favIndex].isFavorite === false ? true : false;
+    updateFruits[favIndex].isFavorite = newFavorite;
+    setFruits(updateFruits)
+    let toggleClass;
+    if (newFavorite) {
+      toggleClass = 'favorite-icon-container' 
+    } 
+    else {
+      toggleClass = 'not-favorite-icon-container'
+    }
+    e.target.className = toggleClass
   }
   function searchFruits(query) {
     const filteredFruits = [];
@@ -113,7 +125,7 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted,isFavorite}}>
+      <AppContext.Provider value={{nutrition,submitted}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
         {isLoading? <Loading/> : 

@@ -31,11 +31,9 @@ const CardContainer = ({nutritiousFruits, nutritionNames,toggleFavorite}) => {
     })
   }
   return (
-
     <div className='card-container'>
       {nutritionCards}
     </div>
-
   )
 }
 

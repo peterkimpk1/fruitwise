@@ -2,15 +2,13 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Card.css'
-import AppContext from '../../../Contexts/AppContext'
 const Card = ({id, name, highestNutrition, lowestNutrition, highestNutritionIndex, lowestNutritionIndex, nutritionNames,toggleFavorite}) => {
-    const isFavorite = useContext(AppContext)
     const capitalNutritionNames = nutritionNames.map(nutrition => nutrition.charAt(0).toUpperCase() + nutrition.slice(1))
     return (
-        <div className='card'>
-            <span className={isFavorite? 'not-favorite-icon-container':'favorite-icon-container'} onClick={toggleFavorite}>
-                <img className='favorite-icon' src={'../../../assets/star.svg'}/>
-            </span>
+        <div className='card' id={id}>
+            <div className={'not-favorite-icon-container'} onClick={toggleFavorite}>
+                <img className='not-favorite-icon-container' src={'../../../assets/star.svg'}/>
+            </div>
             <div className='card-info-wrapper'>
                 <h3>{name}</h3>
                 <div className='image-container'>

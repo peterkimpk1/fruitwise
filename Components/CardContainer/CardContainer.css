@@ -7,8 +7,8 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        width: 22em;
-        height: 23em;
+        width: 21em;
+        height: 22em;
         background-color:  rgba(58, 171, 209,0.3);
         backdrop-filter: blur(20px);
         border-radius: 10px;
@@ -80,7 +80,7 @@
     height: 100%;
 }
 
-@media only screen and (max-width: 85.5em) {
+@media only screen and (max-width: 87.25em) {
     .card-container {
         grid-template-columns: repeat(3,1fr);
     }

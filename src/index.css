@@ -58,16 +58,3 @@ button:hover {
 inset -4px -4px 6px 0 rgba(255,255,255,.2),
 inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
 }
-/* *::-webkit-scrollbar {
-  width: 1.75em;
-}
-
-*::-webkit-scrollbar-track {
-  background: var(--button-color);
-  border-radius: 5px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: grey;
-  border-radius: 5px;
-} */

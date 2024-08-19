@@ -62,7 +62,7 @@
 .main-header {
     text-align: center;
 }
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1195px) {
     .eat-fruit-season-wrapper {
         position: relative;
         display: flex;
