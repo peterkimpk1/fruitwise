@@ -1,6 +1,5 @@
 import React from 'react'
 import './SeasonFruitContainer.css'
-import './SeasonFruitCard/SeasonFruitCard.css'
 import '../../Components/CardContainer/CardContainer.css'
 import CardContainer from '../CardContainer/CardContainer'
 import moment from 'moment'

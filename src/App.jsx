@@ -120,7 +120,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/nutritiousfruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
+          <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
           <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
         </Routes>}
