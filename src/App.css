@@ -47,3 +47,9 @@
 .error-path-message {
     margin-left: 3em;
 }
+.more-info-btn {
+    margin: 0 0 10px 0;
+}
+.detail-btn {
+    margin: 10px 0 0 0;
+}

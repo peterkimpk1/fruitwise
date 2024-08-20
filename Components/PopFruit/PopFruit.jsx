@@ -5,12 +5,12 @@ import {v4 as uuidv4} from 'uuid'
 import './PopFruit.css'
 import AppContext from '../../Contexts/AppContext';
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
 
-const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) => {
+const PopFruit = ({nutritionNames, nutritionSelection, changeNutrition, toggleFavorite}) => {
   const [nutritiousFruits, setNutritiousFruits] = useState([]);
   const [allFruitCards, setAllFruitCards] = useState(false);
   const [fruitCards, setFruitCards] = useState(20);
+  const {fruits} = useContext(AppContext)
   const {nutrition} = useContext(AppContext)
   useEffect(() => {
     getNutritiousFruits(fruits,nutrition.toLowerCase())
@@ -57,7 +57,10 @@ const PopFruit = ({fruits,nutritionNames, nutritionSelection, changeNutrition}) 
         </select>
       </div>
       {nutrition? <p className='fruitcard-number'>{`Showing ${fruitCards}/${fruits.length} Fruits`}</p> : null}
-      {nutrition? <CardContainer nutritiousFruits={nutritiousFruits.slice(0,fruitCards)} nutritionNames={nutritionNames}/>: <p className='no-selection-message'>Choose a nutrition from the drop-down</p>}
+      {nutrition? 
+          <div className='card-container'> 
+            <CardContainer nutritiousFruits={nutritiousFruits.slice(0,fruitCards)} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>
+          </div> : <p className='no-selection-message'>Choose a nutrition from the drop-down</p>}
       {!allFruitCards? <button className='show-more-btn' onClick={showMore}>Show More..</button> : <p id='end-list-msg'>You've reached the end of the list.</p>}
     </div>
   )
@@ -82,4 +85,5 @@ PopFruit.propTypes = {
   changeNutrition: PropTypes.func.isRequired,
   nutritionNames: PropTypes.array.isRequired,
   nutritionSelection: PropTypes.string,
+  toggleFavorite: PropTypes.func.isRequired
 }

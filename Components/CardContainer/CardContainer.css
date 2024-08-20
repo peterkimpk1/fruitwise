@@ -4,42 +4,81 @@
     grid-gap: 20px;
     justify-items: center;
     .card {
-        text-align: center;
         box-sizing: border-box;
         display: flex;
-        justify-content: space-around;
         flex-direction: column;
-        width: 20em;
-        height: 23em;
-        /* background-color: rgba(255,255,255,0.3); */
+        width: 21em;
+        height: 22em;
         background-color:  rgba(58, 171, 209,0.3);
         backdrop-filter: blur(20px);
         border-radius: 10px;
         padding: 1em;
-        .image-container {
-            align-self: center;
-            border: 1px solid white;
-            overflow: hidden;
-            width: 200px;
-            height: 150px;
-            background-color:#3aabd1;
-        }
-        img {
-            align-self: center;
-            width: 100%;
-            height: 100%;
-        }
-        p, h3{
-            margin: 0;
-        }
-        p {
-            /* padding: 0.2em 0 0.2em 0; */
-            font-size: 1.2em;
-        }
     }
 }
 
-@media only screen and (max-width: 85.5em) {
+.favorite-icon-container {
+    background-image: url('../../assets/filledstar.svg');
+    position: fixed;
+    width: 15%;
+    height: 15%;
+    right: 3%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.favorite-icon {
+    background-image: url('../../assets/star.svg');
+    position: fixed;
+    width: 15%;
+    height: 15%;
+    right: 3%;
+}
+.not-favorite-icon-container {
+    position: fixed;
+    width: 15%;
+    height: 15%;
+    right: 3%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.not-favorite-icon-container:hover, .favorite-icon-container:hover {
+    cursor: pointer;
+}
+.card-info-wrapper {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 100%;
+    p {
+        text-align: center;
+        font-size: 1.2em;
+        margin: 0;
+    }
+    h3 {
+        width: 72%;
+        align-self: center;
+        margin: 10px 0 10px 0;
+        line-height: 1;
+    }
+}
+.nutrition-btn-wrapper {
+    margin-top: 10px;
+}
+.image-container {
+    align-self: center;
+    border: 1px solid white;
+    overflow: hidden;
+    width: 200px;
+    height: 150px;
+    background-color:#3aabd1;
+}
+.card-image {
+    align-self: center;
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 87.25em) {
     .card-container {
         grid-template-columns: repeat(3,1fr);
     }

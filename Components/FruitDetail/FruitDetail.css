@@ -5,6 +5,16 @@
     h2, h3{
         margin: 0;
     }
+    h3 {
+        font-size: 2.4em;
+        margin: 0 0 20px 0;
+    }
+    h1 {
+        margin: 10px 0 20px 0;
+        width: 75%;
+        text-align: center;
+        line-height: 1.2;
+    }
     .detail-wrapper {
         width: 50%;
        .detail-container {
@@ -27,6 +37,15 @@
                 aspect-ratio: 4/3;
             }
         }
+        .favorite-icon-container, .not-favorite-icon-container{
+            width: 12%;
+            height: 12%;
+            top: 3%;
+            left: 85%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
     }
     .all-info-wrapper {
         width: 50%;

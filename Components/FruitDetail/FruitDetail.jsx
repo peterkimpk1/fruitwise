@@ -3,22 +3,24 @@ import { useParams } from 'react-router-dom'
 import './FruitDetail.css'
 import PropTypes from 'prop-types'
 
-const FruitDetail = ({fruits}) => {
+const FruitDetail = ({fruits, toggleFavorite}) => {
   const {id} = useParams();
 
   const singleFruit = fruits.find(fruit => fruit.id === +id)
 
-  const { name,family, genus, order, nutritions }= singleFruit
+  const { name,family, genus, order, nutritions, isFavorite }= singleFruit
   const {calories, fat, sugar, carbohydrates, protein} = nutritions
   return (
     <>
-
       <section className='detail-page'>
-        <div className='detail-wrapper'>
-          <div className='detail-container'>
-            <h3>Fruit Name: {name}</h3>
+        <div className='detail-wrapper' >
+          <div className='detail-container' id={id}>
+            <h1 className='detail-name'>{name}</h1>
             <div className='detail-image'>
               <img src={`../../../assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/><span>*Picture may not reflect fruit details*</span>
+            </div>
+            <div className={isFavorite? 'favorite-icon-container':'not-favorite-icon-container'} onClick={toggleFavorite}>
+                <img className={'not-favorite-icon-container'} src={'../../../assets/star.svg'}/>
             </div>
           </div>
         </div>

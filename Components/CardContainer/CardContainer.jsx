@@ -3,9 +3,9 @@ import Card from './Card/Card'
 import './CardContainer.css'
 import PropTypes from 'prop-types'
 
-const CardContainer = ({nutritiousFruits, nutritionNames}) => {
+const CardContainer = ({nutritiousFruits, nutritionNames,toggleFavorite}) => {
   if (nutritiousFruits.length > 0) {
-    var nutritionCards = nutritiousFruits.map(({name,id,family,order,genus,nutritions}) => {
+    var nutritionCards = nutritiousFruits.map(({name,id,family,order,genus,nutritions,isFavorite}) => {
       let singleFruitNutrition = Object.values(nutritions).slice(1)
       let lowestNutrition = Math.min(...singleFruitNutrition)
       let lowestNutritionIndex = singleFruitNutrition.findIndex((e) => e === lowestNutrition)
@@ -25,17 +25,14 @@ const CardContainer = ({nutritiousFruits, nutritionNames}) => {
         lowestNutritionIndex={lowestNutritionIndex}
         nutritions={nutritions}
         nutritionNames={nutritionNames}
+        toggleFavorite={toggleFavorite}
+        isFavorite={isFavorite}
         />
       )
     })
   }
-  return (
-
-    <div className='card-container'>
-      {nutritionCards}
-    </div>
-
-  )
+  return nutritionCards
+  
 }
 
 export default CardContainer
@@ -53,6 +50,8 @@ CardContainer.propTypes = {
       protein: PropTypes.number.isRequired,
       fat: PropTypes.number.isRequired,
     }),
-    order: PropTypes.string.isRequired
+    order: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired
   })),
+  toggleFavorite: PropTypes.func.isRequired
 }

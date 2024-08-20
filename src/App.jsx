@@ -10,11 +10,12 @@ import MainPage from '../Components/MainPage/MainPage'
 import FruitDetail from '../Components/FruitDetail/FruitDetail'
 import AppContext from '../Contexts/AppContext'
 import Loading from '../Components/Loading/Loading'
+import Favorite from '../Components/Favorite/Favorite'
+
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
   const [seasonFruits, setSeasonFruits] = useState([]);
-  const [seasonFruitCards, setSeasonFruitCards] = useState('');
   const [nutritionNames, setNutritionNames] = useState([]);
   const [error, setError] = useState('')
   const [submitted, setSubmitted] = useState(false);
@@ -23,11 +24,12 @@ function App() {
   useEffect(() => {
     getFruit()
     .then(data => {
-      getCurrentMonthFruits(data)
-      setFruits(data)
-      setTimeout(() => {
-        setIsLoading(false)
-      },1000)
+      const favFruits = data.map(fruit => {
+        return {...fruit,isFavorite: false}
+      })
+      getCurrentMonthFruits(favFruits)
+      setFruits(favFruits)
+      setIsLoading(false)
     })
     .catch(err => setError(err.message))
   },[])
@@ -36,6 +38,31 @@ function App() {
   function changeNutrition(nutrition) {
     setNutrition(nutrition)
   }
+  
+  function toggleFavorite(e) {
+    console.log(e.target.parentNode.parentNode)
+    const updateFruits = fruits.slice()
+    const seasonUpdateFruits = seasonFruits.slice()
+    const favIndex = updateFruits.findIndex(fruit => fruit.id === +e.target.parentNode.parentNode.id)
+    const seasonFavIndex = seasonUpdateFruits.findIndex(fruit => fruit.id === +e.target.parentNode.parentNode.id)
+    if (seasonFavIndex !== -1) {
+      const newSeasonFavorite = seasonUpdateFruits[seasonFavIndex].isFavorite === false ? true : false;
+      seasonUpdateFruits[seasonFavIndex].isFavorite = newSeasonFavorite;
+      setSeasonFruits(seasonUpdateFruits)
+    }
+    const newFavorite = updateFruits[favIndex].isFavorite === false ? true : false;
+    updateFruits[favIndex].isFavorite = newFavorite;
+    setFruits(updateFruits)
+    let toggleClass;
+    if (newFavorite) {
+      toggleClass = 'favorite-icon-container' 
+    } 
+    else {
+      toggleClass = 'not-favorite-icon-container'
+    }
+    e.target.className = toggleClass
+  }
+
   function searchFruits(query) {
     const filteredFruits = [];
     fruits.forEach(fruit => {
@@ -80,43 +107,23 @@ function App() {
       return {...singleFruit}
     })
     const fruitNutrition = Object.keys(seasonFruitsInfo[0].nutritions).slice(1).map(nutrition => nutrition.charAt(0).toUpperCase() + nutrition.slice(1))
-    var fruitCards = seasonFruitsInfo.map(fruit => {
-      let singleFruitNutrition = Object.values(fruit.nutritions).slice(1)
-      let lowestNutrition = Math.min(...singleFruitNutrition)
-      let lowestNutritionIndex = singleFruitNutrition.findIndex((e) => e === lowestNutrition)
-      let highestNutrition = Math.max(...singleFruitNutrition)
-      let highestNutritionIndex = singleFruitNutrition.findIndex((e) => e === highestNutrition)
-      return (
-        <div className='season-card' key={fruit.id}>    
-          <h3>{fruit.name}</h3>
-          <div className='season-card-image-container'>
-           <img src={`/assets/${fruit.name.toLowerCase()}.jpg`} alt={`Picture of ${fruit.name}`}/>
-          </div>
-          <p className='high-nutrition' id='top-nutrition-text'>High in: {`${fruitNutrition[highestNutritionIndex]}`}&nbsp;{`${highestNutrition}g`}</p>
-          <p className='low-nutrition'>Low in: {`${fruitNutrition[lowestNutritionIndex]}`}&nbsp;{`${lowestNutrition}g`}</p>
-          <NavLink to={`/details/${fruit.id}`}>
-            <button className='more-info-btn'>More info</button>
-          </NavLink>
-        </div>  
-      )
-    })
-    setSeasonFruitCards(fruitCards)
     setSeasonFruits(seasonFruitsInfo);
     setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
 
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted}}>
+      <AppContext.Provider value={{nutrition,submitted,fruits}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
-        {isLoading? <Loading/> : <Routes>
-          <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} seasonFruitCards={seasonFruitCards}/>}/>
-          <Route path='/nutritiousfruits' element={<PopFruit fruits={fruits} nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition}/>}/>
-          <Route path='/details/:id' element={<FruitDetail fruits={fruits}/>}/>
+        {isLoading? <Loading/> : 
+        <Routes>
+          <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
+          <Route path='/nutritiousfruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
+          <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite}/>}/>
+          <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
           <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
         </Routes>}
-        
       </AppContext.Provider>
     </>
   )
