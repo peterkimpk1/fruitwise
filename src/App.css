@@ -1,12 +1,12 @@
 .query-result {
     width: 28em;
-    overflow: auto;
     max-height: 25em;
+    overflow-x: hidden;
     .result-card {
         display: flex;
         padding: .5em;
         height: 5em;
-        width: 25em;
+        width: 27em;
         border-radius: 10px;
         .fruit-img {
             aspect-ratio: 4/3;

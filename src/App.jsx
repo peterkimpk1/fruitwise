@@ -11,6 +11,7 @@ import FruitDetail from '../Components/FruitDetail/FruitDetail'
 import AppContext from '../Contexts/AppContext'
 import Loading from '../Components/Loading/Loading'
 import Favorite from '../Components/Favorite/Favorite'
+import FruitInfo from '../Components/FruitInfo/FruitInfo'
 
 function App() {
   const [fruits, setFruits] = useState([]);
@@ -40,27 +41,21 @@ function App() {
   }
   
   function toggleFavorite(e) {
-    console.log(e.target.parentNode.parentNode)
+    let toggleClass;
     const updateFruits = fruits.slice()
-    const seasonUpdateFruits = seasonFruits.slice()
     const favIndex = updateFruits.findIndex(fruit => fruit.id === +e.target.parentNode.parentNode.id)
-    const seasonFavIndex = seasonUpdateFruits.findIndex(fruit => fruit.id === +e.target.parentNode.parentNode.id)
-    if (seasonFavIndex !== -1) {
-      const newSeasonFavorite = seasonUpdateFruits[seasonFavIndex].isFavorite === false ? true : false;
-      seasonUpdateFruits[seasonFavIndex].isFavorite = newSeasonFavorite;
-      setSeasonFruits(seasonUpdateFruits)
-    }
     const newFavorite = updateFruits[favIndex].isFavorite === false ? true : false;
     updateFruits[favIndex].isFavorite = newFavorite;
     setFruits(updateFruits)
-    let toggleClass;
+    getCurrentMonthFruits(updateFruits)
     if (newFavorite) {
       toggleClass = 'favorite-icon-container' 
     } 
-    else {
+    else if (!newFavorite) {
       toggleClass = 'not-favorite-icon-container'
     }
     e.target.className = toggleClass
+    e.target.parentNode.className = toggleClass
   }
 
   function searchFruits(query) {
@@ -119,6 +114,7 @@ function App() {
         {isLoading? <Loading/> : 
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
+          <Route path='/fruitinfo' element={<FruitInfo/>}/>
           <Route path='/nutritiousfruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>

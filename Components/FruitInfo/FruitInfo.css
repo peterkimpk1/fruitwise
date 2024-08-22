@@ -1,0 +1,21 @@
+.fruit-info-page {
+    text-align: center;
+}
+
+.fruit-log-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input#amount {
+    margin: 0 10px 0 10px;
+    min-width: 5em;
+    width: fit-content;
+    padding-left: .5em;
+}
+input#amount:not(:in-range) {
+    border: 3px solid #e84688
+}
+select#fruitnames {
+    position: relative;
+}
