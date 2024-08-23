@@ -1,21 +1,80 @@
 .fruit-info-page {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    h3 {
+        text-align: flex-start;
+    }
+
+}
+.daily-fruit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    height: 3.5em;
+    width: 15em;
+    p {
+        width: 10em;
+    }
+    background-color: rgba(128,33,78,0.5);
+    border-radius: 10px;
+}
+.daily-nutrition-days-container{
+    width: 30%;
+}
+.daily-fruit-container {
+    background-color: rgba(128,33,78,0.5);
+}
+.daily-fruit-container,.daily-fruit-container-open {
+    display: flex;
+    flex-direction: column;
+    min-width: 20em;
+    min-height: 20em;
+    align-self: center;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 1em;
     text-align: center;
+    align-items: center;
+    h3 {
+        margin-top: 0;
+    }
+}
+.daily-fruit-container-open {
+    background-color: rgba(128,33,78,0.5);
+    height: fit-content;
 }
 
 .fruit-log-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 27%;
+    margin-left: 10%;
+    margin-top: 1em;
+    h3 {
+        margin: 0;
+    }
 }
 input#amount {
-    margin: 0 10px 0 10px;
-    min-width: 5em;
+    min-width: 3em;
     width: fit-content;
     padding-left: .5em;
+    border: 3px transparent;
 }
 input#amount:not(:in-range) {
     border: 3px solid #e84688
 }
+input#date {
+    width: min-content;
+}
+input#amount, select#unit, #add-fruit-btn {
+    margin-bottom: 10px;
+}
+
 select#fruitnames {
     position: relative;
 }
+

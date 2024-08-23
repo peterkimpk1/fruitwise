@@ -31,7 +31,7 @@
         .detail-image {
             width: 30em;
             height: 22.5em;
-            border: 1px solid white;
+            /* border: 1px solid white; */
             img {
                 width: 100%;
                 aspect-ratio: 4/3;

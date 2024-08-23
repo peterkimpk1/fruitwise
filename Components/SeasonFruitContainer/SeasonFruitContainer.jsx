@@ -10,6 +10,7 @@ const SeasonFruitContainer = ({seasonFruits, nutritionNames, toggleFavorite}) =>
   function handleScroll(e) {
     if (e.target.className === 'lbtn') {
       seasonContainer.current.scrollLeft -= containerSize
+
     }
     else if (e.target.className === 'rbtn') {
       seasonContainer.current.scrollLeft += containerSize
