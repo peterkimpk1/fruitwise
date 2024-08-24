@@ -1,27 +1,52 @@
 .fruit-info-page {
     display: flex;
     /* align-items: center; */
-    justify-content: space-between;
+    justify-content: space-around;
     h3 {
-        text-align: flex-start;
+        text-align: center;
+    }
+}
+.fruit-log-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 27%;
+    margin-top: 1em;
+    h3 {
+        margin: 0;
     }
 
 }
-.daily-fruit {
+
+.daily-section {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-    height: 3.5em;
-    width: 15em;
-    p {
-        width: 10em;
+    flex-direction: column;
+    margin-top: 1em;
+    h3 {
+        margin: 0;
     }
-    background-color: rgba(128,33,78,0.5);
-    border-radius: 10px;
-}
-.daily-nutrition-days-container{
-    width: 30%;
+    .daily-fruit {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+        height: 3.5em;
+        width: 15em;
+        p {
+            width: 8em;
+        }
+        span {
+            margin-right: 10px;
+        }
+        background-color: rgba(128,33,78,0.5);
+        border-radius: 10px;
+    }
+    .log-date {
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 0;
+    }
 }
 .daily-fruit-container {
     background-color: rgba(128,33,78,0.5);
@@ -29,35 +54,57 @@
 .daily-fruit-container,.daily-fruit-container-open {
     display: flex;
     flex-direction: column;
-    min-width: 20em;
+    min-width: 18em;
     min-height: 20em;
-    align-self: center;
+    height: auto;
     border-radius: 10px;
     box-sizing: border-box;
     padding: 1em;
     text-align: center;
     align-items: center;
-    h3 {
-        margin-top: 0;
-    }
+    margin-top: 2em;
 }
 .daily-fruit-container-open {
     background-color: rgba(128,33,78,0.5);
-    height: fit-content;
 }
-
-.fruit-log-container {
+.daily-nutrition-days-container{
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
     flex-direction: column;
-    width: 27%;
-    margin-left: 10%;
+    align-items: center;
+    width: 30%;
+    text-align: center;
     margin-top: 1em;
     h3 {
         margin: 0;
     }
 }
+.nutrition-log-container {
+    display: flex;
+    flex-direction: column;
+    width: 22em;
+    min-height: 20em;
+    text-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgb(255,204,51,.7);
+    margin-top: 5em;
+    padding: 1em;
+    .fruit-log {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+        height: 3.5em;
+        width: 20em;
+        p {
+            width: 13.5em;
+        }
+        background-color: rgb(255,204,51);
+        border-radius: 10px;
+    }
+}
+
 input#amount {
     min-width: 3em;
     width: fit-content;
@@ -67,14 +114,53 @@ input#amount {
 input#amount:not(:in-range) {
     border: 3px solid #e84688
 }
-input#date {
-    width: min-content;
-}
+
 input#amount, select#unit, #add-fruit-btn {
     margin-bottom: 10px;
 }
-
-select#fruitnames {
-    position: relative;
+.card-btn {
+    padding: .25em .5em;
+    margin: 0;
 }
-
+.card-btn:hover:after {
+    content: attr(data-tip);
+    top: 20%;
+}
+#log-edit-btn {
+    margin-right: 10px;
+    anchor-name: --editmsg;
+ 
+}
+.edit-msg{
+    position: absolute;
+    position-anchor: --editmsg;
+    background-color: lightgrey;
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    bottom: anchor(top);
+    left: anchor(15%);
+}
+@media only screen and (max-width: 1050px) {
+    .fruit-info-page {
+        flex-direction: column;
+        align-items: center;
+    }
+    .fruit-log-container {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        place-items: center;
+    }
+    .form-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    i {
+        width: 65%;
+        text-align: center;
+    }
+}

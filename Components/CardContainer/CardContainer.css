@@ -24,6 +24,8 @@
     right: 3%;
     background-repeat: no-repeat;
     background-position: center;
+    transition: 0.3s ease;
+    border-radius: 10px;
 }
 .favorite-icon {
     background-image: url('../../assets/star.svg');
@@ -39,9 +41,13 @@
     right: 3%;
     background-repeat: no-repeat;
     background-position: center;
+    transition: 0.3s ease;
+    border-radius: 10px;
 }
 .not-favorite-icon-container:hover, .favorite-icon-container:hover {
     cursor: pointer;
+
+    background-color:  rgba(58, 171, 209,0.4);
 }
 .card-info-wrapper {
     text-align: center;
