@@ -8,10 +8,10 @@ const Header = () => {
             <li>FruitWise</li>
         </NavLink>
         <div className='navigation'>
-            <NavLink to='/fruitinfo'>
-                <li>Fruit Info</li>
+            <NavLink to='/fruit-log'>
+                <li>Fruit Log</li>
             </NavLink>
-            <NavLink to='/nutritiousfruits'>
+            <NavLink to='/nutritious-fruits'>
                 <li>Nutritious Fruits</li>
             </NavLink>
             <NavLink to='/favorites'>
