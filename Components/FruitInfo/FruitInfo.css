@@ -13,10 +13,16 @@
     flex-direction: column;
     width: 27%;
     margin-top: 1em;
+    height: fit-content;
     h3 {
         margin: 0;
     }
 
+}
+.log-fruit-container {
+    height: fit-content;
+    max-height: 17em;
+    overflow-y: auto;
 }
 
 .daily-section {
@@ -30,6 +36,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
+
         margin-bottom: 10px;
         height: 3.5em;
         width: 15em;
@@ -37,7 +44,8 @@
             width: 8em;
         }
         span {
-            margin-right: 10px;
+            width: 2em;
+            margin-right: 2em;
         }
         background-color: rgba(128,33,78,0.5);
         border-radius: 10px;
@@ -122,25 +130,24 @@ input#amount, select#unit, #add-fruit-btn {
     padding: .25em .5em;
     margin: 0;
 }
-.card-btn:hover:after {
-    content: attr(data-tip);
-    top: 20%;
-}
+
 #log-edit-btn {
     margin-right: 10px;
-    anchor-name: --editmsg;
- 
 }
-.edit-msg{
-    position: absolute;
-    position-anchor: --editmsg;
-    background-color: lightgrey;
+
+.nutrition-breakdown {
+    width: 100%;
     margin: 0;
-    margin-bottom: 5px;
-    font-size: 1em;
-    border-radius: 5px;
-    bottom: anchor(top);
-    left: anchor(15%);
+    border: none;
+    border-top: 1px solid black;
+
+}
+.nutrition-log:nth-child(1) {
+    margin-top: 10px;
+}
+.nutrition-log {
+    margin: 0;
+    line-height: 1.5;
 }
 @media only screen and (max-width: 1050px) {
     .fruit-info-page {
