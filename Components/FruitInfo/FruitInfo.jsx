@@ -15,7 +15,6 @@ const FruitInfo = ({nutritionNames}) => {
     const [editIndex, setEditIndex] = useState(null);
     const [logNutrition, setLogNutrition] = useState([]);
     const dateRef = useRef(null)
-    const today = `${moment().month()+1}/${moment().date()}/${moment().year()}`
     useEffect(() => {
       setMax()
     },[])
@@ -178,8 +177,6 @@ console.log(logNutrition)
             </select>
             <button id='add-fruit-btn' onClick={addFruitInput}>Add fruit</button>
           </div>
-        {/* <p><sup>*</sup>Based on a fruit portion size of 80g<sup>*</sup></p>
-        <i>Source: U.S. FOOD & DRUG ADMINISTRATION, HOLLAND & BARRETT</i> */}
       </div>
       </div>
       <section className='daily-section'>
@@ -205,7 +202,6 @@ console.log(logNutrition)
           <p className='nutrition-log'>{nutritionNames[4].charAt(0).toUpperCase() + nutritionNames[4].slice(1)}: {logNutrition[4]}g</p>
           </div>}
         {logFruits.length > 0 && <button onClick={saveLog}>Save Log</button>}
-        {/*If nutrition level >  */}
         </div>
       </section>
       <section className='daily-nutrition-days-container'>
@@ -222,7 +218,6 @@ console.log(logNutrition)
         </div>
       </section>
     </div>
-    {/* <div className='edit-msg' anchor='log-edit-btn' visibility='hidden'>Edit</div> */}
     </>
   )
 }
