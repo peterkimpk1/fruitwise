@@ -89,6 +89,13 @@ const FruitInfo = ({nutritionNames}) => {
       if (filterFruits.length === 0) {
         dateRef.current.removeAttribute('disabled')
       }
+      if (editIndex !== null && filterFruits.length === 0) {
+        const allLogs = fruitLogs.slice()
+        allLogs.splice(editIndex,1)
+        setFruitLogs(allLogs)
+        setEditIndex(null)
+      }
+
       const singleFruit = fruits.find(fruit => 
         fruit.name.toLowerCase() === fruitName.toLowerCase()
       )
