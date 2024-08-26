@@ -24,8 +24,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [fruitLogs, setFruitLogs] = useState([]);
   const [logFruits, setLogFruits] = useState([])
+  const [logNutrition, setLogNutrition] = useState([]);
   const [dailyLogDate, setDailyLogDate] = useState('')
-
+  const [dateDisable, setDateDisable] = useState(false);
+  const [date, setDate] = useState('')
+  const [editIndex, setEditIndex] = useState(null);
   useEffect(() => {
     getFruit()
     .then(data => {
@@ -118,15 +121,28 @@ function App() {
   function saveLogDate(date) {
     setDailyLogDate(date)
   }
+  function saveLogNutrition(nutrition) {
+    setLogNutrition(nutrition)
+  }
+  function saveDateDisable(boolean) {
+    setDateDisable(boolean)
+  }
+  function saveDate(date) {
+    setDate(date)
+  }
+  function saveEditIndex(index) {
+    setEditIndex(index)
+  }
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted,fruits, fruitLogs, logFruits, dailyLogDate}}>
+      <AppContext.Provider value={{nutrition,submitted,fruits, fruitLogs, logFruits, dailyLogDate, logNutrition, dateDisable, date, editIndex}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
         {isLoading? <Loading/> : 
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='/fruit-log' element={<FruitInfo nutritionNames={nutritionNames} saveFruitLogs={saveFruitLogs} saveLogFruits={saveLogFruits} saveLogDate={saveLogDate}/>}/>
+          <Route path='/fruit-log' element={<FruitInfo nutritionNames={nutritionNames} saveFruitLogs={saveFruitLogs} saveLogFruits={saveLogFruits} saveLogDate={saveLogDate} saveLogNutrition={saveLogNutrition} saveDateDisable={saveDateDisable} saveDate={saveDate}
+          saveEditIndex={saveEditIndex}/>}/>
           <Route path='/nutritious-fruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>

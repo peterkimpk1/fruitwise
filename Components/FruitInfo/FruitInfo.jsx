@@ -3,17 +3,18 @@ import moment from 'moment'
 import './FruitInfo.css'
 import AppContext from '../../Contexts/AppContext'
 import {v4 as uuidv4} from 'uuid'
-const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) => {
+const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, saveLogNutrition, saveDateDisable, saveDate, saveEditIndex}) => {
     const {fruits} = useContext(AppContext)
     const {fruitLogs} = useContext(AppContext)
     const {logFruits} = useContext(AppContext)
     const {dailyLogDate} = useContext(AppContext)
+    const {logNutrition} = useContext(AppContext)
+    const {dateDisable} = useContext(AppContext)
+    const {date} = useContext(AppContext)
+    const {editIndex} = useContext(AppContext)
     const [amount, setAmount] = useState(0);
     const [unit, setUnit] = useState('g')
     const [fruitName, setFruitName] = useState('')
-    const [logDate, setLogDate] = useState('01/01')
-    const [editIndex, setEditIndex] = useState(null);
-    const [logNutrition, setLogNutrition] = useState([]);
     const [inputError, setInputError] = useState(false)
     const dateRef = useRef(null)
     useEffect(() => {
@@ -39,7 +40,7 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) =>
 
     function editFruitLog(date,id,loggedFruits) {
       const editLog = fruitLogs.findIndex((log) => log.id === id)
-      dateRef.current.setAttribute('disabled','true')
+      saveDateDisable(true)
       saveLogDate(`Edit Log: ${moment(date).format('MMM Do YY')}`)
       const totalNutrition = loggedFruits.reduce((acc,loggedFruit,i)=> {
         const singleFruit = fruits.find(fruit => 
@@ -57,21 +58,22 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) =>
         const updateNutrition = singleFruitNutrition.map((nutrition,i) => +(nutrition += acc[i]).toFixed(2))
         return [...updateNutrition]
       },[0,0,0,0,0])
-      setEditIndex(editLog)
-      setLogDate(date)
+      saveEditIndex(editLog)
+      saveDate(date)
       saveLogFruits(loggedFruits)
-      setLogNutrition(totalNutrition)
+      saveLogNutrition(totalNutrition)
     }
     
     function saveLog() {
-      const fruitLog = {date: logDate, fruitLog: [...logFruits], id: uuidv4()}
-      dateRef.current.removeAttribute('disabled')
+      const fruitLog = {date: date, fruitLog: [...logFruits], id: uuidv4()}
+      // dateRef.current.removeAttribute('disabled')
+      saveDateDisable(false)
       saveLogFruits([])
       if (editIndex !== null) {
         const newLogs = fruitLogs.slice()
         newLogs[editIndex] = fruitLog
         saveFruitLogs(newLogs)
-        setEditIndex(null)
+        saveEditIndex(null)
         return;
       }
       const updateLogs = [...fruitLogs, fruitLog]
@@ -79,19 +81,20 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) =>
         new Date(b.date) - new Date(a.date)
       )
       saveFruitLogs(sortedLogs);
-      setLogNutrition([])
+      saveLogNutrition([])
     }
 
     function deleteDailyFruit(fruitName, amount, unit, id) {
       const filterFruits = logFruits.filter((fruit) => fruit.id !== id) 
       if (filterFruits.length === 0) {
-        dateRef.current.removeAttribute('disabled')
+        // dateRef.current.removeAttribute('disabled')
+        saveDateDisable(false)
       }
       if (editIndex !== null && filterFruits.length === 0) {
         const allLogs = fruitLogs.slice()
         allLogs.splice(editIndex,1)
         saveFruitLogs(allLogs)
-        setEditIndex(null)
+        saveEditIndex(null)
       }
 
       const singleFruit = fruits.find(fruit => 
@@ -106,22 +109,20 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) =>
           return +(+singleFruit.nutritions[key] / 100 * (+amount * 28.35)).toFixed(2)
         }
       })
-      saveLogFruits(filterFruits)
-      setLogNutrition(() => {
-        const updateLogNutrition = logNutrition.map((log,i) => {
-          return +(log - singleFruitNutrition[i]).toFixed(2)
-        })
-        return updateLogNutrition
+      const updateLogNutrition = logNutrition.map((log,i) => {
+        return +(log - singleFruitNutrition[i]).toFixed(2)
       })
+      saveLogFruits(filterFruits)
+      saveLogNutrition(updateLogNutrition)
     }
     function deleteFruitLog(id) {
       const filterLogs = fruitLogs.filter((log) => log.id !== id)
       saveFruitLogs(filterLogs)
     }
     function addFruitInput() {
-        if (amount && unit && fruitName && logDate) {
+        if (amount && unit && fruitName && date) {
             const newFruit = {fruitName, amount, unit, id: uuidv4()}
-            dateRef.current.setAttribute('disabled','true')
+            saveDateDisable(true)
             const singleFruit = fruits.find(fruit => 
               fruit.name.toLowerCase() === newFruit.fruitName.toLowerCase()
             )
@@ -134,20 +135,20 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) =>
                 return +(+singleFruit.nutritions[key] / 100 * (+newFruit.amount * 28.35)).toFixed(2)
               }
             })
-            setLogNutrition(() => {
-              if (logNutrition.length > 0) {
-                const updateLogNutrition = logNutrition.map((log,i) => {
-                  return +(log + singleFruitNutrition[i]).toFixed(2)
-                })
-                return updateLogNutrition
-              }
-              else {
-                return singleFruitNutrition
-              }
-            })
+            if (logNutrition.length > 0) {
+              const updateLogNutrition = logNutrition.map((log,i) => {
+                return +(log + singleFruitNutrition[i]).toFixed(2)
+              })
+              saveLogNutrition(updateLogNutrition)
+            }
+            else {
+              saveLogNutrition(singleFruitNutrition)
+            }
             const updatedLogFruits = [...logFruits,newFruit]
             saveLogFruits(updatedLogFruits)
-            saveLogDate(`Log Date: ${moment(logDate).format('MMM Do YY')}`)
+            if (!dailyLogDate.includes('Edit')) {
+              saveLogDate(`Log Date: ${moment(date).format('MMM Do YY')}`)
+            }
             setInputError(false)
         }
         else {
@@ -166,7 +167,7 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) =>
         </select>
         <div className='form-container'>
           <label htmlFor='fruit-date'></label>
-          <input type='date' id='fruit-date' min={"2024-01-01"} ref={dateRef} onChange={(e) => setLogDate(e.target.value)}></input><br></br>
+          <input type='date' id='fruit-date' min={"2024-01-01"} disabled={!dateDisable? false: true} ref={dateRef} onChange={(e) => saveDate(e.target.value)}></input><br></br>
           <label htmlFor="amount"></label>
           <div>
             <input type='number' id='amount' min={0} max={250} onChange={(e) => setAmount(e.target.value)}></input>
@@ -181,7 +182,7 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate}) =>
       </div>
       <section className='daily-section'>
         <h3>Daily Fruits</h3>
-        {!logFruits.length > 0? <p className='log-date' style={{visibility:'hidden'}}>{logDate}</p> : <p className='log-date'style={{visibility:'visible'}}>{dailyLogDate}</p> }
+        {!logFruits.length > 0? <p className='log-date' style={{visibility:'hidden'}}>{'01/01'}</p> : <p className='log-date'style={{visibility:'visible'}}>{dailyLogDate}</p> }
         <div className={!logFruits.length > 0 ? 'daily-fruit-container':'daily-fruit-container-open'}>
         {!logFruits.length > 0? <p>Log a fruit to start tracking!</p> : <div className='log-fruit-container'>{logFruits.map(({fruitName, amount, unit, id}) => {
           return (
