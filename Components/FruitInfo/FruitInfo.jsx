@@ -14,6 +14,7 @@ const FruitInfo = ({nutritionNames}) => {
     const [fruitLogs, setFruitLogs] = useState([])
     const [editIndex, setEditIndex] = useState(null);
     const [logNutrition, setLogNutrition] = useState([]);
+    const [inputError, setInputError] = useState(false)
     const dateRef = useRef(null)
     useEffect(() => {
       setMax()
@@ -151,6 +152,10 @@ const FruitInfo = ({nutritionNames}) => {
               return updatedLogFruits
             })
             setDailyLogDate(`Log Date: ${moment(logDate).format('MMM Do YY')}`)
+            setInputError(false)
+        }
+        else {
+          setInputError(true)
         }
     }
   return (
@@ -158,7 +163,7 @@ const FruitInfo = ({nutritionNames}) => {
     <div className='fruit-info-page'>
       <div className='fruit-log-container'>
         <h3>Select fruit(s)</h3>
-        {/* <span>Please fill out all inputs</span> */}
+        {inputError && <span style={{color: red}}>*Please fill out all inputs</span>}
         <label htmlFor='fruitnames'></label>
         <select name='fruitnames' id='fruitnames' value={fruitName} onChange={(e) => setFruitName(e.target.value)} size='15'>
             {fruitNames}
