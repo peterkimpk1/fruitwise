@@ -22,6 +22,10 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [nutrition, setNutrition] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [fruitLogs, setFruitLogs] = useState([]);
+  const [logFruits, setLogFruits] = useState([])
+  const [dailyLogDate, setDailyLogDate] = useState('')
+
   useEffect(() => {
     getFruit()
     .then(data => {
@@ -105,16 +109,24 @@ function App() {
     setSeasonFruits(seasonFruitsInfo);
     setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
-
+  function saveFruitLogs(log) {
+    setFruitLogs(log)
+  }
+  function saveLogFruits(fruits) {
+    setLogFruits(fruits)
+  }
+  function saveLogDate(date) {
+    setDailyLogDate(date)
+  }
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted,fruits}}>
+      <AppContext.Provider value={{nutrition,submitted,fruits, fruitLogs, logFruits, dailyLogDate}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
         {isLoading? <Loading/> : 
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='/fruit-log' element={<FruitInfo nutritionNames={nutritionNames}/>}/>
+          <Route path='/fruit-log' element={<FruitInfo nutritionNames={nutritionNames} saveFruitLogs={saveFruitLogs} saveLogFruits={saveLogFruits} saveLogDate={saveLogDate}/>}/>
           <Route path='/nutritious-fruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
