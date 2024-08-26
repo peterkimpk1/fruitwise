@@ -18,7 +18,7 @@ const Card = ({id, name, highestNutrition, lowestNutrition, highestNutritionInde
                     <p className='high-nutrition'>{`High in: ${capitalNutritionNames[highestNutritionIndex+1]} ${highestNutrition}g`} </p>
                     <p className='low-nutrition'>{`Low in: ${capitalNutritionNames[lowestNutritionIndex+1]} ${lowestNutrition}g`} </p>
                     <Link to={`/details/${id}`}>
-                        <button className='detail-btn'>More Info?</button>
+                        <button className='detail-btn'>More Info</button>
                     </Link>
                 </div>
             </div>

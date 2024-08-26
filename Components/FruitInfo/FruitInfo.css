@@ -84,6 +84,7 @@
     margin-top: 1em;
     h3 {
         margin: 0;
+        width: max-content;
     }
 }
 .nutrition-log-container {

@@ -153,7 +153,6 @@ const FruitInfo = ({nutritionNames}) => {
             setDailyLogDate(`Log Date: ${moment(logDate).format('MMM Do YY')}`)
         }
     }
-console.log(logNutrition)
   return (
     <>
     <div className='fruit-info-page'>
