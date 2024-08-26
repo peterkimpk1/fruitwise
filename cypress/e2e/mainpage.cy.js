@@ -71,10 +71,10 @@ describe('template spec', () => {
   it('should be able to go to a different page and come back to main', () => {
     cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
     cy.visit('http://localhost:5173')
-    cy.get('[href="/nutritiousfruits"] > li').click()
-    cy.url().should('include','/nutritiousfruits')
+    cy.get('#nutritious-fruits-nav').click()
+    cy.url().should('include','/nutritious-fruits')
     cy.go('back')
-    cy.url().should('not.include','/nutritiousfruits')
+    cy.url().should('not.include','/nutritious-fruits')
   })
   it('should have a different layout at 1100px width', () => {
     cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
@@ -95,7 +95,7 @@ describe('template spec', () => {
     cy.visit('http://localhost:5173')
     cy.get('.not-favorite-icon-container').first().click()
     cy.get('.favorite-icon-container').should('exist')
-    cy.get('[href="/nutritiousfruits"] > li').click()
+    cy.get('#nutritious-fruits-nav').click()
     cy.get('#nutritions').select([2])
     cy.get('.favorite-icon-container').should('exist')
     cy.get('[href="/favorites"] > li').click()
@@ -104,7 +104,7 @@ describe('template spec', () => {
   it('should be able to unfavorite a card after favoriting it', () => {
     cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
     cy.visit('http://localhost:5173')
-    cy.get('[href="/nutritiousfruits"] > li').click()
+    cy.get('#nutritious-fruits-nav').click()
     cy.get('#nutritions').select([2])
     cy.get('.not-favorite-icon-container').first().click()
     cy.get('.favorite-icon-container').first().click()

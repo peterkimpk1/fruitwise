@@ -14,7 +14,7 @@ describe('template spec', () => {
     it('should display all three sections', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+      cy.get('#fruit-log-nav').click()
       cy.get('.fruit-info-page').should('exist')
       cy.get('.fruit-log-container > h3').should('contain.text','Select fruit(s)')
       cy.get('#fruitnames').should('exist')
@@ -25,7 +25,7 @@ describe('template spec', () => {
     it('should be able to make a selection and populate inputs', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+      cy.get('#fruit-log-nav').click()
       cy.get('[value="Persimmon"]').click()
       cy.get('#fruit-date').type('2024-01-01')
       cy.get('#fruit-date').should('have.value','2024-01-01')
@@ -35,7 +35,7 @@ describe('template spec', () => {
     it('should be able to add a fruit and see daily fruits section populate', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+      cy.get('#fruit-log-nav').click()
       cy.get('#fruitnames').select([1])
       cy.get('#fruit-date').type('2024-01-01')
       cy.get('#amount').type(5)
@@ -49,7 +49,7 @@ describe('template spec', () => {
     it('should be able to add multiple fruits and have nutrition breakdown change', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+      cy.get('#fruit-log-nav').click()
       cy.get('#fruitnames').select([1])
       cy.get('#fruit-date').type('2024-01-01')
       cy.get('#amount').type(5)
@@ -64,7 +64,7 @@ describe('template spec', () => {
     it('should be able to add multiple fruits and delete fruit to have nutrition breakdown change', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+      cy.get('#fruit-log-nav').click()
       cy.get('#fruitnames').select([1])
       cy.get('#fruit-date').type('2024-01-01')
       cy.get('#amount').type(5)
@@ -80,7 +80,7 @@ describe('template spec', () => {
     it('should be able to add a fruit and save to the log', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+        cy.get('#fruit-log-nav').click()
       cy.get('#fruitnames').select([1])
       cy.get('#fruit-date').type('2024-01-01')
       cy.get('#amount').type(5)
@@ -93,7 +93,7 @@ describe('template spec', () => {
     it('should be able to edit the log even if theres multiple', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+       cy.get('#fruit-log-nav').click()
       cy.get('#fruitnames').select([1])
       cy.get('#fruit-date').type('2024-01-01')
       cy.get('#amount').type(5)
@@ -112,10 +112,10 @@ describe('template spec', () => {
       cy.get('.daily-fruit-container-open > :nth-child(3)').click()
       cy.get('.fruit-log').should('have.length',2)
     })
-    it('should be able to edit the log even if theres multiple', () => {
+    it('should be able to delete the log even if theres multiple', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
-      cy.get('[href="/fruitinfo"] > li').click()
+      cy.get('#fruit-log-nav').click()
       cy.get('#fruitnames').select([1])
       cy.get('#fruit-date').type('2024-01-01')
       cy.get('#amount').type(5)
@@ -134,7 +134,16 @@ describe('template spec', () => {
       cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
       cy.visit('http://localhost:5173/')
       cy.viewport(1050,800)
-      cy.get('[href="/fruitinfo"] > li').click()
+      cy.get('#fruit-log-nav').click()
       cy.get('.fruit-info-page').should('have.css','flex-direction','column')
+    })
+    it.only('should display a error validation message if the user submits with an empty input field', () => {
+      cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
+      cy.visit('http://localhost:5173/')
+      cy.viewport(1050,800)
+      cy.get('#fruit-log-nav').click()
+      cy.get('#add-fruit-btn').click()
+      cy.get('span').should('exist')
+      cy.get('span').should('have.text','*Please fill out all inputs')
     })
   })
