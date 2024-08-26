@@ -130,4 +130,11 @@ describe('template spec', () => {
       cy.get('.fruit-log p').should('have.length',1)
       cy.get('.fruit-log p').should('have.text','Date: Jan 1st 24')
     })
+    it('should change the layout on breakpoint', () => {
+        cy.intercept('https://justcors.com/l_zd7p6xl6tg/https://fruityvice.com/api/fruit/all',data)
+        cy.visit('http://localhost:5173/')
+        cy.viewport(1050,800)
+        cy.get('[href="/fruitinfo"] > li').click()
+        cy.get('.fruit-info-page').should('have.css','flex-direction','column')
+    })
   })
