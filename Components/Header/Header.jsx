@@ -8,14 +8,14 @@ const Header = () => {
             <li>FruitWise</li>
         </NavLink>
         <div className='navigation'>
-            <NavLink to='/'>
-                <li>Show All</li>
+            <NavLink to='/fruit-log'>
+                <li id='fruit-log-nav'>Fruit Log</li>
             </NavLink>
-            <NavLink to='/nutritiousfruits'>
-                <li>Nutritious Fruits</li>
+            <NavLink to='/nutritious-fruits'>
+                <li id='nutritious-fruits-nav'>Nutritious Fruits</li>
             </NavLink>
             <NavLink to='/favorites'>
-                <li>Favorites</li>
+                <li id='favorites-nav'>Favorites</li>
             </NavLink>
         </div>
     </nav>

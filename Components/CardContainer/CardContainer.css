@@ -24,6 +24,8 @@
     right: 3%;
     background-repeat: no-repeat;
     background-position: center;
+    transition: 0.3s ease;
+    border-radius: 10px;
 }
 .favorite-icon {
     background-image: url('../../assets/star.svg');
@@ -39,9 +41,13 @@
     right: 3%;
     background-repeat: no-repeat;
     background-position: center;
+    transition: 0.3s ease;
+    border-radius: 10px;
 }
 .not-favorite-icon-container:hover, .favorite-icon-container:hover {
     cursor: pointer;
+
+    background-color:  rgba(58, 171, 209,0.4);
 }
 .card-info-wrapper {
     text-align: center;
@@ -79,11 +85,20 @@
 }
 
 @media only screen and (max-width: 87.25em) {
+
     .card-container {
         grid-template-columns: repeat(3,1fr);
     }
 }
-@media only screen and (max-width: 63.75em) {
+@media only screen and (max-width: 64em) {
+    .select-wrapper {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+    }
+    select#nutritions {
+        align-self: center;
+    }
     .card-container {
         grid-template-columns: repeat(2,1fr);
     }

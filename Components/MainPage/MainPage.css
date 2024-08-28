@@ -98,5 +98,28 @@
             width: 19em;
         }
     }
+    .lbtn, .rbtn {
+        display: none;
+        top: 25%;
+   }
+}
+@media only screen and (max-width: 320px) {
+    nav {
+        font-size: 0.8em;
+    }
+    .search-bar {
+        width: 10em;
+    }
+    .query-result {
+        width: 20em;
+        .result-card {
+            width: 18em;
+        }
+    }
+    .eat-fruit-season-wrapper {
+        margin-left: 20%;
+    }
+
+
 
 }

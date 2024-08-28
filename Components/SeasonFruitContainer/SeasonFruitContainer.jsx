@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import './SeasonFruitContainer.css'
 import '../../Components/CardContainer/CardContainer.css'
 import CardContainer from '../CardContainer/CardContainer'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 const SeasonFruitContainer = ({seasonFruits, nutritionNames, toggleFavorite}) => {
+  const seasonContainer = useRef(null)
+  const containerSize = 352;
+  function handleScroll(e) {
+    if (e.target.className === 'lbtn') {
+      seasonContainer.current.scrollLeft -= containerSize
+
+    }
+    else if (e.target.className === 'rbtn') {
+      seasonContainer.current.scrollLeft += containerSize
+    }
+  }
   return (
     <div className='season-fruit-container'>
       <h2>{moment().format('MMMM')}'s Seasonal Fruits</h2>
-      <div className='season-cards-container'>
-        <CardContainer nutritiousFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>
+      <div className='season-cards-btn-wrapper'>
+        <button className='lbtn' onClick={(e) => handleScroll(e)}>{'<'}</button>
+        <div className='season-cards-container' ref={seasonContainer}>
+          <CardContainer nutritiousFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>
+        </div>
+       <button className='rbtn' onClick={(e) => handleScroll(e)}>{'>'}</button>
       </div>
-      {/* <button className='direction-btn'>Left</button>
-      <button className='direction-btn'>Right</button> */}
     </div>
   )
 }

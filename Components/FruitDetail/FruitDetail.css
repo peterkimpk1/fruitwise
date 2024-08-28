@@ -29,9 +29,8 @@
         padding: 1em;
        }
         .detail-image {
-            width: 30em;
-            height: 22.5em;
-            border: 1px solid white;
+            max-width: 30em;
+            max-height: 22.5em;
             img {
                 width: 100%;
                 aspect-ratio: 4/3;
@@ -70,5 +69,27 @@
     }
     .all-info-wrapper {
         transform: translateY(10%)
+    }
+}
+@media only screen and (max-width: 43.75em) {
+    .detail-wrapper,.all-info-wrapper {
+        min-width: 500px;
+    }
+
+}
+@media only screen and (max-width: 34.375em) {
+    .detail-wrapper,.all-info-wrapper {
+        min-width: 350px;
+    }
+    .detail-wrapper {
+        height: 450px;
+    }
+    .detail-page {
+        h3 {
+            font-size: 1.6em;
+        }
+        .info-wrapper {
+            width: 300px;
+        }
     }
 }

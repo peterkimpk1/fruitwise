@@ -11,6 +11,7 @@ import FruitDetail from '../Components/FruitDetail/FruitDetail'
 import AppContext from '../Contexts/AppContext'
 import Loading from '../Components/Loading/Loading'
 import Favorite from '../Components/Favorite/Favorite'
+import FruitInfo from '../Components/FruitInfo/FruitInfo'
 
 function App() {
   const [fruits, setFruits] = useState([]);
@@ -21,6 +22,13 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [nutrition, setNutrition] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [fruitLogs, setFruitLogs] = useState([]);
+  const [logFruits, setLogFruits] = useState([])
+  const [logNutrition, setLogNutrition] = useState([]);
+  const [dailyLogDate, setDailyLogDate] = useState('')
+  const [dateDisable, setDateDisable] = useState(false);
+  const [date, setDate] = useState('')
+  const [editIndex, setEditIndex] = useState(null);
   useEffect(() => {
     getFruit()
     .then(data => {
@@ -40,27 +48,21 @@ function App() {
   }
   
   function toggleFavorite(e) {
-    console.log(e.target.parentNode.parentNode)
+    let toggleClass;
     const updateFruits = fruits.slice()
-    const seasonUpdateFruits = seasonFruits.slice()
     const favIndex = updateFruits.findIndex(fruit => fruit.id === +e.target.parentNode.parentNode.id)
-    const seasonFavIndex = seasonUpdateFruits.findIndex(fruit => fruit.id === +e.target.parentNode.parentNode.id)
-    if (seasonFavIndex !== -1) {
-      const newSeasonFavorite = seasonUpdateFruits[seasonFavIndex].isFavorite === false ? true : false;
-      seasonUpdateFruits[seasonFavIndex].isFavorite = newSeasonFavorite;
-      setSeasonFruits(seasonUpdateFruits)
-    }
     const newFavorite = updateFruits[favIndex].isFavorite === false ? true : false;
     updateFruits[favIndex].isFavorite = newFavorite;
     setFruits(updateFruits)
-    let toggleClass;
+    getCurrentMonthFruits(updateFruits)
     if (newFavorite) {
       toggleClass = 'favorite-icon-container' 
     } 
-    else {
+    else if (!newFavorite) {
       toggleClass = 'not-favorite-icon-container'
     }
     e.target.className = toggleClass
+    e.target.parentNode.className = toggleClass
   }
 
   function searchFruits(query) {
@@ -110,16 +112,38 @@ function App() {
     setSeasonFruits(seasonFruitsInfo);
     setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
-
+  function saveFruitLogs(log) {
+    setFruitLogs(log)
+  }
+  function saveLogFruits(fruits) {
+    setLogFruits(fruits)
+  }
+  function saveLogDate(date) {
+    setDailyLogDate(date)
+  }
+  function saveLogNutrition(nutrition) {
+    setLogNutrition(nutrition)
+  }
+  function saveDateDisable(boolean) {
+    setDateDisable(boolean)
+  }
+  function saveDate(date) {
+    setDate(date)
+  }
+  function saveEditIndex(index) {
+    setEditIndex(index)
+  }
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted,fruits}}>
+      <AppContext.Provider value={{nutrition,submitted,fruits, fruitLogs, logFruits, dailyLogDate, logNutrition, dateDisable, date, editIndex}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
         {isLoading? <Loading/> : 
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='/nutritiousfruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
+          <Route path='/fruit-log' element={<FruitInfo nutritionNames={nutritionNames} saveFruitLogs={saveFruitLogs} saveLogFruits={saveLogFruits} saveLogDate={saveLogDate} saveLogNutrition={saveLogNutrition} saveDateDisable={saveDateDisable} saveDate={saveDate}
+          saveEditIndex={saveEditIndex}/>}/>
+          <Route path='/nutritious-fruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite}/>}/>
           <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
           <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
