@@ -106,6 +106,7 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
         newLogs[editIndex] = fruitLog
         saveFruitLogs(newLogs)
         saveEditIndex(null)
+        saveLogNutrition([])
         return;
       }
       const updateLogs = [...fruitLogs, fruitLog]
