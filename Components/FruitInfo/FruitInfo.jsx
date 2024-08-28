@@ -16,11 +16,41 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
     const [unit, setUnit] = useState('g')
     const [fruitName, setFruitName] = useState('')
     const [inputError, setInputError] = useState(false)
+    const [logFruitsNode, setLogFruitsNode] = useState('')
+    const [fruitNumber, setFruitNumber] = useState(0);
+    const [secondFruitNumber, setSecondFruitNumber] = useState(4);
     const dateRef = useRef(null)
     useEffect(() => {
       setMax()
     },[])
-    const fruitNames = fruits.map(fruit => {
+    useEffect(() => {
+      const fruitsNode = logFruits.map(({fruitName, amount, unit, id}) => {
+        return (
+          <div className='daily-fruit' key={id} >
+              <p>{fruitName}</p><span>&nbsp;&nbsp;&nbsp;{amount}&nbsp;{unit}</span>
+              <div>
+                <button className='card-btn'onClick={() => deleteDailyFruit(fruitName, amount, unit, id)}>🗑️</button>
+              </div>
+            </div>
+        )
+      })
+      setLogFruitsNode(fruitsNode)
+    },[logFruits])
+    function changeFruitNumber(e) {
+      if (e.target.className === 'lbtn-1' && fruitNumber !== 0) {
+        const newNumber = fruitNumber - 4
+        const secondNewNumber = secondFruitNumber - 4
+        setFruitNumber(newNumber)
+        setSecondFruitNumber(secondNewNumber)
+      }
+      else if (e.target.className === 'rbtn-1' && logFruits.length > secondFruitNumber) {
+        const newNumber = fruitNumber + 4;
+        const secondNewNumber = secondFruitNumber + 4;
+        setFruitNumber(newNumber)
+        setSecondFruitNumber(secondNewNumber)
+      }
+    }
+    const fruitNames = fruits.sort((a,b) => a.name.localeCompare(b.name)).map(fruit => {
       return (
           <option value={fruit.name} key={uuidv4()}>{fruit.name}</option>
       )
@@ -36,6 +66,7 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
         day = '0' + day
       }
       dateRef.current.setAttribute('max',`${year}-${month}-${day}`)
+      saveDate(`${year}-${month}-${day}`)
     }
 
     function editFruitLog(date,id,loggedFruits) {
@@ -66,9 +97,10 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
     
     function saveLog() {
       const fruitLog = {date: date, fruitLog: [...logFruits], id: uuidv4()}
-      // dateRef.current.removeAttribute('disabled')
       saveDateDisable(false)
       saveLogFruits([])
+      setFruitNumber(0);
+      setSecondFruitNumber(4);
       if (editIndex !== null) {
         const newLogs = fruitLogs.slice()
         newLogs[editIndex] = fruitLog
@@ -87,7 +119,6 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
     function deleteDailyFruit(fruitName, amount, unit, id) {
       const filterFruits = logFruits.filter((fruit) => fruit.id !== id) 
       if (filterFruits.length === 0) {
-        // dateRef.current.removeAttribute('disabled')
         saveDateDisable(false)
       }
       if (editIndex !== null && filterFruits.length === 0) {
@@ -95,8 +126,8 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
         allLogs.splice(editIndex,1)
         saveFruitLogs(allLogs)
         saveEditIndex(null)
+        saveLogDate('')
       }
-
       const singleFruit = fruits.find(fruit => 
         fruit.name.toLowerCase() === fruitName.toLowerCase()
       )
@@ -112,6 +143,22 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
       const updateLogNutrition = logNutrition.map((log,i) => {
         return +(log - singleFruitNutrition[i]).toFixed(2)
       })
+      if (filterFruits.length === 4) {
+        setFruitNumber(0);
+        setSecondFruitNumber(4);
+      }
+      if (filterFruits.length === 8) {
+        setFruitNumber(4);
+        setSecondFruitNumber(8);
+      }
+      if (filterFruits.length === 12) {
+        setFruitNumber(8);
+        setSecondFruitNumber(12);
+      }
+      if (filterFruits.length === 16) {
+        setFruitNumber(12);
+        setSecondFruitNumber(16);
+      }
       saveLogFruits(filterFruits)
       saveLogNutrition(updateLogNutrition)
     }
@@ -146,7 +193,7 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
             }
             const updatedLogFruits = [...logFruits,newFruit]
             saveLogFruits(updatedLogFruits)
-            if (!dailyLogDate.includes('Edit')) {
+            if (editIndex === null) {
               saveLogDate(`Log Date: ${moment(date).format('MMM Do YY')}`)
             }
             setInputError(false)
@@ -184,17 +231,9 @@ const FruitInfo = ({nutritionNames,saveFruitLogs, saveLogFruits,saveLogDate, sav
         <h3>Daily Fruits</h3>
         {!logFruits.length > 0? <p className='log-date' style={{visibility:'hidden'}}>{'01/01'}</p> : <p className='log-date'style={{visibility:'visible'}}>{dailyLogDate}</p> }
         <div className={!logFruits.length > 0 ? 'daily-fruit-container':'daily-fruit-container-open'}>
-        {!logFruits.length > 0? <p>Log a fruit to start tracking!</p> : <div className='log-fruit-container'>{logFruits.map(({fruitName, amount, unit, id}) => {
-          return (
-            <div className='daily-fruit' key={id} >
-                <p>{fruitName}</p><span>&nbsp;&nbsp;&nbsp;{amount}&nbsp;{unit}</span>
-                <div>
-                  <button className='card-btn'onClick={() => deleteDailyFruit(fruitName, amount, unit, id)}>🗑️</button>
-                </div>
-              </div>
-          )
-        })}</div>}
+        {!logFruits.length > 0? <p>Log a fruit to start tracking!</p> : <div className='log-fruit-container'>{logFruitsNode.slice(fruitNumber,secondFruitNumber)}</div>}
         {logFruits.length > 0 && <div className='nutrition-breakdown'>
+          {logFruits.length > 4 && <><button className='lbtn-1' onClick={changeFruitNumber}>{`<`}</button> <button className='rbtn-1' onClick={changeFruitNumber}>{`>`}</button></>}
           <h4>Total Nutrition</h4>
           <p className='nutrition-log'>{nutritionNames[0].charAt(0).toUpperCase() + nutritionNames[0].slice(1)}: {logNutrition[0]}</p>
           <p className='nutrition-log'>{nutritionNames[1].charAt(0).toUpperCase() + nutritionNames[1].slice(1)}: {logNutrition[1]}g</p>

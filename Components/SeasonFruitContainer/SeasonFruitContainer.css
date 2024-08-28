@@ -9,8 +9,8 @@
         scroll-snap-align: center;
         flex-shrink: 0;
         box-sizing: border-box;
-        width: 22em;
-        height: 24em;
+        width: 20em;
+        height: 22em;
         background-color:rgba(58, 171, 209,0.3);
         backdrop-filter: blur(20px);
         border-radius: 10px;
@@ -23,7 +23,7 @@
         }
         .nutrition-btn-wrapper {
             margin: 0;
-            transform: translateY(-10%);
+            /* transform: translateY(-10%); */
         }
         .not-favorite-icon-container, .favorite-icon-container {
             top: 5%;
@@ -34,8 +34,8 @@
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
-    width: 22em;
-    height: 25em;
+    width: 20em;
+    height: 23em;
     scroll-snap-type: x mandatory;
     align-items: center;
     scroll-behavior: smooth;

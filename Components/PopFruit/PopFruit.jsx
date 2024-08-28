@@ -49,7 +49,7 @@ const PopFruit = ({nutritionNames, nutritionSelection, changeNutrition, toggleFa
   }
   return (
     <div className='nutrition-page'>
-      <div>
+      <div className='select-wrapper'>
         <label htmlFor='nutritions'>Select a nutrition to sort by </label>
         <select name='nutritions' id='nutritions'value={nutrition} onChange={(e) => changeNutrition(e.target.value)}>
           <option key={uuidv4()} value=''></option>

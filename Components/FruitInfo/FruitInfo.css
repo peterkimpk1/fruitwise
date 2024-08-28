@@ -1,7 +1,6 @@
 .fruit-info-page {
     display: flex;
-    /* align-items: center; */
-    justify-content: space-around;
+    justify-content: space-evenly;
     h3 {
         text-align: center;
     }
@@ -11,7 +10,7 @@
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
-    width: 27%;
+    /* width: 27%; */
     margin-top: 1em;
     height: fit-content;
     h3 {
@@ -20,15 +19,14 @@
 
 }
 .log-fruit-container {
-    height: fit-content;
-    max-height: 17em;
-    overflow-y: auto;
+    height: 17em;
 }
 
 .daily-section {
     display: flex;
     flex-direction: column;
     margin-top: 1em;
+    position: relative;
     h3 {
         margin: 0;
     }
@@ -36,16 +34,18 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-
         margin-bottom: 10px;
-        height: 3.5em;
-        width: 15em;
+        height: 3.1em;
+        width: 20em;
         p {
             width: 8em;
+            font-size: 1.15em;
+            line-height: 1.2;
         }
         span {
             width: 2em;
-            margin-right: 2em;
+            font-size: 1.15em;
+            margin-right: 4em;
         }
         background-color: rgba(128,33,78,0.5);
         border-radius: 10px;
@@ -55,6 +55,18 @@
         text-align: center;
         margin-bottom: 0;
     }
+    .lbtn-1, .rbtn-1 {
+        font-size: 1.35em;
+        position: absolute;
+        top: 55%;
+        padding: .25em .5em;
+    }
+    .rbtn-1 {
+      left: 75%;
+    }
+    .lbtn-1 {
+      right: 75%;
+    }
 }
 .daily-fruit-container {
     background-color: rgba(128,33,78,0.5);
@@ -62,9 +74,9 @@
 .daily-fruit-container,.daily-fruit-container-open {
     display: flex;
     flex-direction: column;
-    min-width: 18em;
-    min-height: 20em;
-    height: auto;
+    min-width: 22em; 
+    min-height: 25em; 
+    height: 35em;
     border-radius: 10px;
     box-sizing: border-box;
     padding: 1em;
@@ -79,7 +91,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
     text-align: center;
     margin-top: 1em;
     h3 {
@@ -90,8 +101,9 @@
 .nutrition-log-container {
     display: flex;
     flex-direction: column;
-    width: 22em;
-    min-height: 20em;
+    min-width: 22em; /*18*/
+    min-height: 25em; /*20*/
+    height: 35em;
     text-align: center;
     align-items: center;
     box-sizing: border-box;
@@ -110,7 +122,8 @@
         height: 3.5em;
         width: 20em;
         p {
-            width: 13.5em;
+            width: 12em;
+            font-size: 1.15em;
         }
         background-color: rgb(255,204,51);
         border-radius: 10px;
@@ -133,6 +146,7 @@ input#amount, select#unit, #add-fruit-btn {
 .card-btn {
     padding: .25em .5em;
     margin: 0;
+    font-size: 1.2em;
 }
 
 #log-edit-btn {
@@ -141,10 +155,15 @@ input#amount, select#unit, #add-fruit-btn {
 
 .nutrition-breakdown {
     width: 100%;
+    /* height: 17em; */
     margin: 0;
     border: none;
     border-top: 1px solid black;
-
+    h4 {
+        font-size: 1.4em;
+        margin: 1em 0 1em 0;
+    }
+    
 }
 .nutrition-log:nth-child(1) {
     margin-top: 10px;

@@ -85,11 +85,20 @@
 }
 
 @media only screen and (max-width: 87.25em) {
+
     .card-container {
         grid-template-columns: repeat(3,1fr);
     }
 }
-@media only screen and (max-width: 63.75em) {
+@media only screen and (max-width: 64em) {
+    .select-wrapper {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+    }
+    select#nutritions {
+        align-self: center;
+    }
     .card-container {
         grid-template-columns: repeat(2,1fr);
     }
