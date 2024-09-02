@@ -4,13 +4,18 @@ import './CardContainer.css'
 import PropTypes from 'prop-types'
 
 const CardContainer = ({nutritiousFruits, nutritionNames,toggleFavorite}) => {
+  console.log(nutritiousFruits)
   if (nutritiousFruits.length > 0) {
     var nutritionCards = nutritiousFruits.map(({name,id,family,order,genus,nutritions,isFavorite}) => {
-      let singleFruitNutrition = Object.values(nutritions).slice(1)
-      let lowestNutrition = Math.min(...singleFruitNutrition)
-      let lowestNutritionIndex = singleFruitNutrition.findIndex((e) => e === lowestNutrition)
-      let highestNutrition = Math.max(...singleFruitNutrition)
-      let highestNutritionIndex = singleFruitNutrition.findIndex((e) => e === highestNutrition)
+      console.log(typeof nutritions)
+      console.log(nutritions)
+      var singleFruitNutrition = Object.values(nutritions)
+      var lowestNutrition = Math.min(...singleFruitNutrition)
+      var lowestNutritionIndex = singleFruitNutrition.findIndex((e) => e === lowestNutrition)
+      var highestNutrition = Math.max(...singleFruitNutrition)
+      var highestNutritionIndex = singleFruitNutrition.findIndex((e) => e === highestNutrition)
+      
+
       return (
         <Card
         key={id}
@@ -31,7 +36,7 @@ const CardContainer = ({nutritiousFruits, nutritionNames,toggleFavorite}) => {
       )
     })
   }
-  return nutritionCards
+  return (nutritiousFruits.length > 0 && nutritionCards)
   
 }
 

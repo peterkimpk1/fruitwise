@@ -19,7 +19,7 @@ const MainPage = ({searchFruits, results, seasonFruits, toggleFavorite, nutritio
           <SearchContainer searchFruits={searchFruits} results={results}/>
         </div>
         <div className='search-reason-wrapper'>
-          <SeasonFruitContainer seasonFruits={seasonFruits} toggleFavorite={toggleFavorite} nutritionNames={nutritionNames}/>
+          {seasonFruits.length > 0 ? <SeasonFruitContainer seasonFruits={seasonFruits} toggleFavorite={toggleFavorite} nutritionNames={nutritionNames}/>: null}
           <section className='reason-section'>
             <h2 className='main-header'>Why fruits?</h2>
             <div className='reason-container'>
@@ -56,11 +56,11 @@ MainPage.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     nutritions: PropTypes.shape({
-      carbohydrates: PropTypes.number.isRequired,
-      calories: PropTypes.number.isRequired,
-      sugar: PropTypes.number.isRequired,
-      protein: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
+      carbohydrates: PropTypes.number,
+      calories: PropTypes.number,
+      sugar: PropTypes.number,
+      protein: PropTypes.number,
+      fat: PropTypes.number,
     }),
     order: PropTypes.string.isRequired
   })),
