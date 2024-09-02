@@ -8,7 +8,7 @@ export const allSeasonalFruitsData = [
     { Summer: ['Blackberry', 'Raspberry', 'Blueberry', 'Watermelon', 
         'Peach', 'Melon', 'Plum', 'Mango', 'Passionfruit', 'Fig', 'Tomato', 'Green Apple' ]},
     { Fall: ['Persimmon', 'Pomegranate', 'Apple', 'Pear', 'Cranberry',
-        'Grapes', 'Japanese Persimmon', 'Pumpkin']},
+        'Grape', 'Japanese Persimmon', 'Pumpkin']},
     { Winter: [
         'Orange', 'Tangerine', 'Lemon', 'Lime', 'Guava',
         'Feijoa', 'Pomelo']},

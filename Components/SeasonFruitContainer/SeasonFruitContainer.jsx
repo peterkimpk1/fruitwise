@@ -22,7 +22,7 @@ const SeasonFruitContainer = ({seasonFruits, nutritionNames, toggleFavorite}) =>
       <div className='season-cards-btn-wrapper'>
         <button className='lbtn' onClick={(e) => handleScroll(e)}>{'<'}</button>
         <div className='season-cards-container' ref={seasonContainer}>
-          <CardContainer nutritiousFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>
+          {seasonFruits.length > 0 && <CardContainer nutritiousFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}
         </div>
        <button className='rbtn' onClick={(e) => handleScroll(e)}>{'>'}</button>
       </div>
@@ -39,11 +39,11 @@ SeasonFruitContainer.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     nutritions: PropTypes.shape({
-      carbohydrates: PropTypes.number.isRequired,
-      calories: PropTypes.number.isRequired,
-      sugar: PropTypes.number.isRequired,
-      protein: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
+      carbohydrates: PropTypes.number,
+      calories: PropTypes.number,
+      sugar: PropTypes.number,
+      protein: PropTypes.number,
+      fat: PropTypes.number,
     }),
     order: PropTypes.string.isRequired
   })),
