@@ -11,10 +11,12 @@
 5. Navigate to `http://localhost:5173/`
 
 ### Technologies Used
-- React, React Router, Cypress, JSX, CSS
+- React, React Router, Cypress, CSS
 
 ### Screenshot of App
 ![Screenshot 2024-09-02 at 7 36 02 PM](https://github.com/user-attachments/assets/0191bd7a-d47f-42b2-85a3-f95e240ae059)
+<img width="1406" alt="Screenshot 2024-09-10 at 9 00 52 PM" src="https://github.com/user-attachments/assets/0e46e390-a681-47a7-a5b7-529700410a61">
+
 
 ### Working App
 [Click Here](https://fruitwise.vercel.app/)
