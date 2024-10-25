@@ -12,7 +12,7 @@ import AppContext from '../Contexts/AppContext'
 import Loading from '../Components/Loading/Loading'
 import Favorite from '../Components/Favorite/Favorite'
 import FruitInfo from '../Components/FruitInfo/FruitInfo'
-
+import { fruitsData } from './fruitsData'
 function App() {
   const [fruits, setFruits] = useState([]);
   const [results, setResults] = useState('');
@@ -30,16 +30,22 @@ function App() {
   const [date, setDate] = useState('')
   const [editIndex, setEditIndex] = useState(null);
   useEffect(() => {
-    getFruit()
-    .then(data => {
-      const favFruits = data.map(fruit => {
-        return {...fruit,isFavorite: false}
-      })
-      getCurrentMonthFruits(favFruits)
-      setFruits(favFruits)
-      setIsLoading(false)
+    // getFruit()
+    // .then(data => {
+    //   const favFruits = data.map(fruit => {
+    //     return {...fruit,isFavorite: false}
+    //   })
+
+    // })
+    // .catch(err => setError(err.message))
+    // console.log(fruitsData)
+    const favFruits = fruitsData.map(fruit => {
+      return {...fruit, isFavorite: false}
     })
-    .catch(err => setError(err.message))
+    console.log(favFruits)
+    getCurrentMonthFruits(favFruits)
+    setFruits(favFruits)
+    setIsLoading(false)
   },[])
   let currentDate = moment().format('MMMM')
   
@@ -108,8 +114,9 @@ function App() {
       )
       return {...singleFruit}
     })
+    const existingSeasonFruitsInfo = seasonFruitsInfo.filter(seasonFruit => Object.keys(seasonFruit).length !== 0 )
     const fruitNutrition = Object.keys(seasonFruitsInfo[0].nutritions).slice(1).map(nutrition => nutrition.charAt(0).toUpperCase() + nutrition.slice(1))
-    setSeasonFruits(seasonFruitsInfo);
+    setSeasonFruits(existingSeasonFruitsInfo);
     setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
   function saveFruitLogs(log) {
@@ -138,6 +145,7 @@ function App() {
       <AppContext.Provider value={{nutrition,submitted,fruits, fruitLogs, logFruits, dailyLogDate, logNutrition, dateDisable, date, editIndex}}>
         <Header/>
         {error && <p className='error-msg'>{error}</p>}
+        <p style={{textAlign: 'center',fontSize:'1.2rem'}}>Disclaimer: FruityVice API is currently unavailable so all data is rendered locally</p>
         {isLoading? <Loading/> : 
         <Routes>
           <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
