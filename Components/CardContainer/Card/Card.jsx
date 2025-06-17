@@ -15,8 +15,8 @@ const Card = ({id, name, highestNutrition, lowestNutrition, highestNutritionInde
                     <img className='card-image' src={`../../../assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
                 </div>
                 <div className='nutrition-btn-wrapper'>
-                    <p className='high-nutrition'>{`High in: ${capitalNutritionNames[highestNutritionIndex+1]} ${highestNutrition}g`} </p>
-                    <p className='low-nutrition'>{`Low in: ${capitalNutritionNames[lowestNutritionIndex+1]} ${lowestNutrition}g`} </p>
+                    <p className='high-nutrition'>{`High in: ${capitalNutritionNames[highestNutritionIndex]} ${highestNutrition}g`} </p>
+                    <p className='low-nutrition'>{`Low in: ${capitalNutritionNames[lowestNutritionIndex]} ${lowestNutrition}g`} </p>
                     <Link to={`/details/${id}`}>
                         <button className='detail-btn'>More Info</button>
                     </Link>

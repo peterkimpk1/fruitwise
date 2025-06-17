@@ -31,22 +31,23 @@ function App() {
   const [editIndex, setEditIndex] = useState(null);
   useEffect(() => {
     getFruit()
-    .then(data => {
-      const favFruits = data.map(fruit => {
-        return {...fruit,isFavorite: false}
+      .then(data => {
+        const favFruits = data.map(fruit => {
+          return { ...fruit, isFavorite: false }
+        })
+        getCurrentMonthFruits(favFruits)
+        setFruits(favFruits)
+        setIsLoading(false)
       })
-      getCurrentMonthFruits(favFruits)
-      setFruits(favFruits)
-      setIsLoading(false)
-    })
-    .catch(err => setError(err.message))
-  },[])
+      .catch(err => setError(err.message))
+
+  }, [])
   let currentDate = moment().format('MMMM')
-  
+
   function changeNutrition(nutrition) {
     setNutrition(nutrition)
   }
-  
+
   function toggleFavorite(e) {
     let toggleClass;
     const updateFruits = fruits.slice()
@@ -56,8 +57,8 @@ function App() {
     setFruits(updateFruits)
     getCurrentMonthFruits(updateFruits)
     if (newFavorite) {
-      toggleClass = 'favorite-icon-container' 
-    } 
+      toggleClass = 'favorite-icon-container'
+    }
     else if (!newFavorite) {
       toggleClass = 'not-favorite-icon-container'
     }
@@ -72,12 +73,12 @@ function App() {
         filteredFruits.push(fruit)
       }
     })
-    if(filteredFruits.length > 0) {
-      let results = filteredFruits.map(({id,family,genus,name}) => {
+    if (filteredFruits.length > 0) {
+      let results = filteredFruits.map(({ id, family, genus, name }) => {
         return (
           <NavLink to={`/details/${id}`} className='search-link' key={id}>
             <div className='result-card' >
-              <img className='fruit-img' src={`/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`}/>
+              <img className='fruit-img' src={`/assets/${name.toLowerCase()}.jpg`} alt={`Picture of ${name}`} />
               <div className='fruit-info'>
                 <p>Name: {name}</p>
                 <p>Family: {family}</p>
@@ -95,21 +96,22 @@ function App() {
   function getCurrentMonthFruits(data) {
     let currentSeason;
     seasonsData.forEach(season => {
-        let seasonKey = Object.keys(season)
-        if(season[seasonKey].includes(currentDate)) {
-            currentSeason = seasonKey[0]
-        }
+      let seasonKey = Object.keys(season)
+      if (season[seasonKey].includes(currentDate)) {
+        currentSeason = seasonKey[0]
+      }
     })
-    const currentSeasonFruits = allSeasonalFruitsData.find(seasonalFruits => 
-        Object.keys(seasonalFruits)[0] === currentSeason
+    const currentSeasonFruits = allSeasonalFruitsData.find(seasonalFruits =>
+      Object.keys(seasonalFruits)[0] === currentSeason
     )
     const seasonFruitsInfo = currentSeasonFruits[currentSeason].map(seasonFruit => {
       let singleFruit = data.find(fruit => (fruit.name === seasonFruit) || (fruit.name === seasonFruit.split(' ').join(''))
       )
-      return {...singleFruit}
+      return { ...singleFruit }
     })
+    const existingSeasonFruitsInfo = seasonFruitsInfo.filter(seasonFruit => Object.keys(seasonFruit).length !== 0)
     const fruitNutrition = Object.keys(seasonFruitsInfo[0].nutritions).slice(1).map(nutrition => nutrition.charAt(0).toUpperCase() + nutrition.slice(1))
-    setSeasonFruits(seasonFruitsInfo);
+    setSeasonFruits(existingSeasonFruitsInfo);
     setNutritionNames(Object.keys(seasonFruitsInfo[0].nutritions));
   };
   function saveFruitLogs(log) {
@@ -135,23 +137,22 @@ function App() {
   }
   return (
     <>
-      <AppContext.Provider value={{nutrition,submitted,fruits, fruitLogs, logFruits, dailyLogDate, logNutrition, dateDisable, date, editIndex}}>
-        <Header/>
+      <AppContext.Provider value={{ nutrition, submitted, fruits, fruitLogs, logFruits, dailyLogDate, logNutrition, dateDisable, date, editIndex }}>
+        <Header />
         {error && <p className='error-msg'>{error}</p>}
-        {isLoading? <Loading/> : 
-        <Routes>
-          <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='/fruit-log' element={<FruitInfo nutritionNames={nutritionNames} saveFruitLogs={saveFruitLogs} saveLogFruits={saveLogFruits} saveLogDate={saveLogDate} saveLogNutrition={saveLogNutrition} saveDateDisable={saveDateDisable} saveDate={saveDate}
-          saveEditIndex={saveEditIndex}/>}/>
-          <Route path='/nutritious-fruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite}/>}/>
-          <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>}/>
-        </Routes>}
+        {isLoading ? <Loading /> :
+          <Routes>
+            <Route path='/' element={<MainPage searchFruits={searchFruits} results={results} seasonFruits={seasonFruits} nutritionNames={nutritionNames} toggleFavorite={toggleFavorite} />} />
+            <Route path='/fruit-log' element={<FruitInfo nutritionNames={nutritionNames} saveFruitLogs={saveFruitLogs} saveLogFruits={saveLogFruits} saveLogDate={saveLogDate} saveLogNutrition={saveLogNutrition} saveDateDisable={saveDateDisable} saveDate={saveDate}
+              saveEditIndex={saveEditIndex} />} />
+            <Route path='/nutritious-fruits' element={<PopFruit nutritionNames={nutritionNames} nutritionSelection={nutrition} changeNutrition={changeNutrition} toggleFavorite={toggleFavorite} />} />
+            <Route path='/details/:id' element={<FruitDetail fruits={fruits} toggleFavorite={toggleFavorite} />} />
+            <Route path='/favorites' element={<Favorite nutritionNames={nutritionNames} toggleFavorite={toggleFavorite} />} />
+            <Route path='*' element={<h2 className='error-path-message'>Error 404: Route does not exist.</h2>} />
+          </Routes>}
       </AppContext.Provider>
     </>
   )
 }
 
 export default App
- 
